@@ -34,17 +34,18 @@ to this project so we can use its research skills.
 
 It needs a local shell: the agent has to clone the repo and run `curl`, `jq`, and `pdftotext`.
 
-| Works | Tested |
-|-------|--------|
-| Claude Code | yes, this repo was built in it |
-| Claude desktop app | yes |
-| ChatGPT desktop app | yes |
-| Other coding agents with shell access (Codex, Cursor, Copilot agent mode in an editor, Gemini CLI) | untested; should work |
+| App | Works | Notes |
+|-----|-------|-------|
+| Claude Code | yes | this repo was built in it |
+| Claude desktop app | yes | tested |
+| ChatGPT desktop app | yes | tested |
+| ChatGPT on the web | no | tested; browser, no shell |
+| Gemini desktop app (macOS) | no | tested; no local execution environment |
+| Copilot desktop app (macOS) | no | tested; no local execution environment |
+| Other coding agents with shell access (Codex, Cursor, Copilot agent mode in an editor, Gemini CLI) | untested | should work |
 
-Web chat apps cannot: no local execution environment to clone into or run scripts in. That rules
-out chat in the browser, and the Gemini and Copilot chat apps. An agent without a shell can still
-read the method over HTTP, starting at [llms.txt](llms.txt), and follow it by hand without the
-scripts.
+An agent without a shell can still read the method over HTTP, starting at [llms.txt](llms.txt),
+and follow it by hand without the scripts.
 
 ## If you are an agent
 
