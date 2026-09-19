@@ -15,7 +15,7 @@ Last updated: 2026-09-19
 
 ## Waiting on the human
 
-- Sanity check: 6 claims in `outputs/_sanity-check.md`
+- Sanity check: C008, C011, C016 in `outputs/_sanity-check.md` not yet checked (quick mode chosen)
 - Confirm assumed design decisions in `brief.md`
 - Rename `perspectives` skill?
 

@@ -34,7 +34,7 @@ reviews)? Which of these should the harness support as skills?
 
 ## Distinctions that matter here
 
-- **Method against product.** A review type names a process; an evidence brief or policy brief names a package for a reader. Sutton et al. 2019 exclude products from their typology on this ground.
+- **Method against product.** A review type names a process; an evidence brief or policy brief names a package for a reader. Sutton et al. 2019 left product labels off their list on this ground.
 - **Map against answer.** Scoping reviews and evidence maps describe what evidence exists; systematic reviews appraise it to answer a question.
 - **Perspective article against perspectives map.** In journal usage a Perspective is one author's viewpoint. This harness's `perspectives` skill maps several parties' positions.
 
@@ -56,3 +56,5 @@ review, typology, systematic, scoping, rapid, umbrella, mapping, evidence gap ma
 | 2026-09-19 | design | Source types admitted | Methods papers, review-organisation guidance, publisher author guides | assumed |
 | 2026-09-19 | design | Health-centred typologies acceptable as a start? | Yes; non-health typologies queued | assumed |
 | 2026-09-19 | design | Involvement level | light | assumed |
+| 2026-09-19 | sanity check | When, how much, how? | Now; quick (top 3); one at a time | human |
+| 2026-09-19 | sanity check | C003, C001, C004 | C003 and C001 confirmed. C004 overgeneralised one typology to all; narrowed to Sutton et al. and confirmed. C005, C006, C020 from the same source reworded as attributed judgments | human |

@@ -33,7 +33,7 @@ and associated knowledge-translation units.
 
 ## Relation to other sources
 
-Sutton et al. (`002`) classify the policy brief as a product, not a review method.
+Sutton et al. (`002`) left "policy brief" off their list of review types as a product, not a method.
 
 ---
 Retrieved: 2026-09-19

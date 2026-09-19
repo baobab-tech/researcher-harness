@@ -13,8 +13,12 @@
 Sutton et al. compile 48 review types from 15 published typologies and group them into seven
 families by common purpose and characteristics: traditional reviews, systematic reviews, review of
 reviews, rapid reviews, qualitative reviews, mixed method reviews, and purpose-specific reviews.
-They exclude labels that name a product and not a method, citing "evidence brief", "rapid
-response", and "policy brief". They find several pairs used interchangeably with no methodological
+In their Discussion they list review types that did not make their final list. One reason given:
+"evidence brief" is "a product rather than a process", so labels naming a product, "for example
+rapid response or policy brief", were excluded. They present this as one of several scoping
+decisions in a classification that "cannot cover every single instance from a fast-moving and
+expanding field", and note a newer typology published after their analysis (Aveyard and
+Bradbury-Jones, 2019). They find several pairs used interchangeably with no methodological
 difference: overview against umbrella review, narrative synthesis against narrative review, and
 scoping against mapping review.
 
@@ -60,7 +64,8 @@ guidance from review-producing organisations, PubMed, MEDLINE, and Google Schola
 
 Body text read from the accepted manuscript on White Rose. Table 3 read from the published Wiley
 version via Jina Reader, which reached it on 2026-09-19 after earlier attempts hit a Cloudflare
-interstitial. Health-focused. Booth co-authored the 2009 typology. No funding stated in the
+interstitial. Health-focused. By the authors' own account the list is incomplete: several review types
+were left off, and typologies published after their analysis are not included. Booth co-authored the 2009 typology. No funding stated in the
 manuscript.
 
 ## Relation to other sources

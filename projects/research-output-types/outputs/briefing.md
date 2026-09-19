@@ -48,7 +48,7 @@ Maps show what evidence exists without appraising it to answer a question.
   conducted, key characteristics of a concept, precursor to a systematic review, knowledge gaps [C008]
   ([004](../sources/004-munn-2018-scoping-vs-systematic.md)). No quality assessment, so it cannot
   find gaps where existing research is poor [C010] ([005](../sources/005-arksey-omalley-2005-scoping-framework.md)).
-- **Mapping review / systematic map.** Used interchangeably with scoping review in practice [C005]
+- **Mapping review / systematic map.** Sutton et al. report the terms used interchangeably with scoping review [C005]
   ([002](../sources/002-sutton-2019-48-review-types-seven-families.md)).
 - **Evidence and gap map.** Systematic-review methods, output displayed as a matrix, usually
   interventions by outcomes [C014] ([007](../sources/007-white-2020-campbell-evidence-gap-maps.md)).
@@ -66,13 +66,14 @@ From Nature's content types ([009](../sources/009-nature-2026-content-types.md))
 
 ## 5. Decision-support products
 
-Sutton et al. exclude these from review typologies because they name a package for a reader, not a
-method [C004] ([002](../sources/002-sutton-2019-48-review-types-seven-families.md)).
+Sutton et al. left these labels off their list of 48 review types because they name a product
+rather than a method, one of several scoping decisions in a list they say is incomplete [C004] ([002](../sources/002-sutton-2019-48-review-types-seven-families.md)).
 
 - **Policy brief.** Problem, options with costs and consequences, implementation considerations,
   context-specific, built mainly from systematic reviews [C015]
   ([008](../sources/008-lavis-2009-policy-briefs.md)).
-- **Evidence brief, rapid response.** Named by Sutton et al. as products; not examined here.
+- **Evidence brief, rapid response.** Named by Sutton et al. as products they excluded; not
+  examined here.
 - **Health technology assessment.** A multi-question systematic review within an
   evidence-to-decision framework [C020] ([002](../sources/002-sutton-2019-48-review-types-seven-families.md)).
 
@@ -84,13 +85,14 @@ method [C004] ([002](../sources/002-sutton-2019-48-review-types-seven-families.m
 ## Human review
 
 Intent checkpoint: the request, recorded in [brief.md](../brief.md). Design decisions were assumed,
-not confirmed. Sanity check: packet sent ([_sanity-check.md](_sanity-check.md)); 0 claims
-human-confirmed so far.
+not confirmed. Sanity check, quick mode: 3 of 19 cited claims human-confirmed (C001, C003, C004);
+C004 was narrowed before confirmation ([_sanity-check.md](_sanity-check.md)).
 
 ## Distinctions
 
-- **Method against product.** "Scoping review" names a method; "policy brief" names a package. A
-  product can sit on any method.
+- **Method against product.** This project's framing, following the reason Sutton et al. give for one
+  exclusion [C004]: "scoping review" names a method; "policy brief" names a product, which can sit
+  on any method.
 - **Map against answer.** Scoping reviews and EGMs describe the evidence; systematic reviews
   appraise it and answer a question.
 - **Perspective against perspectives map.** A journal Perspective is one author's view. The

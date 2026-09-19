@@ -15,13 +15,14 @@ What researchers produce, from process steps to finished outputs. 9 sources.
 
 ## How to read these
 
-The typologies are health-centred. Typologies classify methods; policy and evidence briefs are
-products that sit on top of a method and are excluded from them.
+The typologies are health-centred. Sutton et al. left policy and evidence briefs off
+their list as products rather than methods [C004]; this project treats products as a separate
+category on that basis.
 
 ## Human review
 
-0 of the cited claims human-confirmed. [Sanity-check packet](outputs/_sanity-check.md) awaiting answers;
-three design decisions assumed ([brief](brief.md)).
+3 of 19 cited claims human-confirmed in a quick sanity check ([packet](outputs/_sanity-check.md)).
+Three design decisions still assumed ([brief](brief.md)).
 
 ## Gaps
 

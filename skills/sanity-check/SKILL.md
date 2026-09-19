@@ -62,6 +62,9 @@ and comments back from the file or artifact.
 - `claims.md`, `Human` column: `confirmed YYYY-MM-DD`, `wrong`, or `unsure`, with the note in Note.
 - `wrong`: fix the source file and the claim, then re-check every output citing it. If the error
   came from a pattern (a misread table, a wrong boundary), check the other claims from that source.
+- A note asking for nuance or a narrower reading counts as `wrong`: revise the claim and every
+  output citing it, check the same source's other claims for the same overreach, then ask the human
+  to confirm the new wording.
 - `unsure`: the output says the claim was queried.
 - `brief.md` Decisions: one row for the check (date, mode, how many checked, results).
 - Framing questions from the template ("stated too strongly?", "anything missing?") go at the end,
