@@ -18,7 +18,7 @@ Point an AI agent at this repo and it researches the way a careful researcher wo
 
 **Version 0.** Expect rough edges; the method is the stable part.
 
-## Quick start
+## ⚡ Quick start
 
 You do not need to clone this yourself. In an agent that can run commands on your machine, paste:
 
