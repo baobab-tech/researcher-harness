@@ -1,7 +1,7 @@
 # [Project title]
 
 **Created:** YYYY-MM-DD
-**Process:** [background-research | lit-review | perspectives | source-review | mixed]
+**Process:** [background-research | lit-review | scoping-review | rapid-review | evidence-gap-map | positions-map | policy-brief | source-review | mixed]
 **Involvement:** [high: stop at every checkpoint | standard: intent, design, sanity check, draft | light: intent and sanity check]
 
 ## Intent

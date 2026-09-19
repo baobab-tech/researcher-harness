@@ -35,7 +35,8 @@ missing. If the project already holds sources, read `METHOD.md` first. Output te
    record with `scripts/doi.sh`, find each number in the cached text, record boundary, method,
    funding, epistemic status, and the design's weaknesses.
 
-7. **Claims.** Enter every claim the review will use into `claims.md`.
+7. **Claims.** Enter every claim the review will use into `claims.md`, one block each with scope,
+   period, attribution, kind, and quote (Claims ledger, `AGENTS.md`).
 
 8. **CHECKPOINT: sanity check.** Run the `sanity-check` skill.
 
@@ -46,8 +47,5 @@ missing. If the project already holds sources, read `METHOD.md` first. Output te
 11. **Close.** Rebuild `_index.md` and `README.md`, run `scripts/check.sh <slug>`, update
     `_queue.md`. **CHECKPOINT: handoff.**
 
-**Scoping review:** skip risk-of-bias appraisal, chart evidence by type and concept, and state that
-the review maps evidence and does not answer an effectiveness question
-(`projects/research-output-types/sources/004-munn-2018-scoping-vs-systematic.md`).
-**Rapid review:** agree the shortcuts with the human at step 2 and list them in the Method section
-(`projects/research-output-types/sources/006-garritty-2021-cochrane-rapid-review-methods.md`).
+For a map of the evidence without appraisal, use `skills/scoping-review/SKILL.md`; under a deadline,
+`skills/rapid-review/SKILL.md`; for a matrix of where evidence exists, `skills/evidence-gap-map/SKILL.md`.

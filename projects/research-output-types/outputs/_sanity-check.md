@@ -4,7 +4,7 @@
 
 Spot-check these before the output is shared. Each takes about a minute: open the link, find the
 quote, confirm the number and its boundary. Mark each row `confirmed`, `wrong`, or `unsure` and add
-a note. Answers go into the `Human` column of `claims.md`.
+a note. Answers go into the `Human` field of each claim in `claims.md`.
 
 | Claim | Why picked | Statement | Where to look | Quote from source | Your check |
 |-------|-----------|-----------|---------------|-------------------|------------|

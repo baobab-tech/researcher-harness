@@ -21,6 +21,7 @@ then wait for the answer.
 
 | Checkpoint | When | Ask about |
 |------------|------|-----------|
+| **resume** | start of a session | which project, which waiting items to clear, now or later (`skills/resume/SKILL.md`) |
 | **intent** | before anything else | purpose, the decision or use it feeds, audience, what they already know or believe, material they hold, what done looks like |
 | **design** | before searching | question wording, sub-questions, method (see below), scope, criteria, sources they trust or distrust, named documents and people they know |
 | **early findings** | after the first 3 to 5 sources | whether the direction, source mix, and depth are right; surprises so far |
@@ -85,12 +86,12 @@ At the design checkpoint, offer the methods that fit the question and let the hu
 
 | If the question is | Offer |
 |--------------------|-------|
-| "what exists on X" | scoping review, evidence map, background briefing |
-| "does X work / how large is X" | systematic review, rapid review |
-| "what do reviews already say" | umbrella review |
-| "who argues what" | perspectives map |
-| "is this document right" | source review |
-| "what should we do" | policy brief built on one of the above |
+| "what exists on X", "how is X defined" | `scoping-review`, `evidence-gap-map`, `background-research` |
+| "does X work", "how large is X" | `lit-review` (systematic), `rapid-review` under a deadline |
+| "what do reviews already say" | `lit-review` restricted to systematic reviews (umbrella review) |
+| "who argues what" | `positions-map` |
+| "is this document right" | `source-review` |
+| "what should we do" | `policy-brief`, built on one of the above |
 
 Definitions and trade-offs: `projects/research-output-types/outputs/briefing.md`. Record the choice
 and any adaptation in `brief.md` and in the output's Method section.
@@ -122,7 +123,7 @@ projects/<slug>/
   claims.md       every claim outputs use, with its sources       templates/claims.md
   README.md       what the evidence establishes                   templates/project-readme.md
   sources/        NNN-author-year-topic.md, one per finding       templates/source.md
-  outputs/        briefing, review, perspectives, source reviews  templates/outputs/
+  outputs/        briefing, review, positions map, brief, etc.  templates/outputs/
   _work/          working notes, one file per task or subagent    templates/notes.md
   inputs/         material the human provides                     checkpoint answers
   .cache/         raw fetched text, gitignored                    scripts/fetch.sh
@@ -140,7 +141,7 @@ or from a summary.
 |-------|------|----------|--------------|
 | 0. Raw | `.cache/NNN.txt` | full text as fetched | `scripts/fetch.sh` |
 | 1. Source | `sources/NNN-*.md` | one source's findings, numbers, boundary, funding, limits | layer 0 |
-| 2. Claim | `claims.md` | one row per claim, citing layer-1 files, with a status | layer 1 |
+| 2. Claim | `claims.md` | one block per claim: statement, scope, period, attribution, kind, quote, status | layer 1 | layer 1 |
 | 3. Output | `outputs/*.md`, `README.md` | prose for a reader, citing claim IDs `[C001]` | layer 2 |
 
 - Save every fetched full text to `.cache/` named by its source number. Verification re-reads it
@@ -168,16 +169,64 @@ Agents lose context; files do not. Write state down as you go.
 
 ## Claims ledger
 
-`claims.md` is a table: ID, claim, value, boundary, source files, status, date checked, note.
+`claims.md` holds one block per claim. A claim is the unit an output cites, a human checks, and a
+later pass re-verifies, so it carries everything needed to judge it without opening the output.
 
-- One row per distinct claim. The same number on a different boundary is a different claim.
-- `supported`: found in every listed source on the stated boundary.
-- `contested`: sources on the same boundary disagree. The note says how.
-- `unsupported`: asserted somewhere, found in no retrieved source. Kept so outputs can say so.
-- `Human` records a person's spot-check: `confirmed YYYY-MM-DD`, `wrong`, `unsure`, or blank. Only a
-  human answer fills it. A `wrong` claim is fixed before any output cites it.
-- IDs are permanent. A deleted claim's ID is not reused.
-- `scripts/check.sh` fails on a cited ID missing from the ledger or a ledger row citing a missing file.
+```markdown
+### C007: Systematic review subtypes
+
+- **Statement:** Munn et al. (2018) divide systematic reviews into ten types by the question asked.
+- **Value:** 10 types
+- **Scope:** medical and health sciences; excludes scoping, rapid, umbrella, and literature reviews
+- **Period:** typology as published January 2018
+- **Context:** proposed by JBI methodologists; not derived from a sample of published reviews
+- **Attributed to:** Munn, Stern, Aromataris, Lockwood, Jordan (JBI)
+- **Kind:** classification
+- **Sources:** [003](sources/003-munn-2018-ten-systematic-review-types.md), Background
+- **Quote:** "ten different types of systematic review foci are listed below"
+- **Status:** supported
+- **Checked:** 2026-09-19
+- **Recheck:** stable
+- **Human:** confirmed 2026-09-19
+- **Note:**
+```
+
+| Field | Holds | Required |
+|-------|-------|----------|
+| Statement | one sentence that stands alone: who says what, about what, when. "Google reported a 2.3% fall in 2025 operational emissions", not "emissions fell 2.3%" | yes |
+| Value | number, unit, and statistic (median, mean, total, range); `none` for qualitative claims | no |
+| Scope | what is counted and what is excluded: population, geography, system boundary, sample | yes |
+| Period | the time the claim is about: "calendar 2024", "FY25", "as of March 2022", "2019-2023". Absolute dates only | yes |
+| Context | conditions it holds under: assumptions, baseline or comparator, method, setting | when it changes the reading |
+| Attributed to | whoever asserts it. `this project` for the project's own inferences | yes |
+| Kind | `measurement`, `estimate`, `projection`, `model output`, `definition`, `classification`, `expert judgment`, `opinion`, or `inference` | yes |
+| Sources | links to source files, each with a locator: page, table, section | yes |
+| Quote | exact words from the cached source text that support the claim | yes, except `inference` |
+| Depends on | claim IDs an `inference` or derived figure is computed from | for `inference` |
+| Status | `supported`, `contested`, or `unsupported` | yes |
+| Checked | date the agent last found it in the source | yes |
+| Recheck | a month (`2027-03`) after which the claim may be out of date, or `stable` | yes |
+| Human | `confirmed YYYY-MM-DD`, `wrong`, `unsure`, or empty. Only a human answer fills it | field present |
+| Note | how contested sources differ; anything else a checker needs | no |
+
+Rules:
+
+- **One claim per block.** The same number with a different scope or period is a different claim.
+- **Time.** Period is when the claim is true of; the source's publication date lives in its source
+  file; Checked is when this project verified it. A claim about the present needs an as-of date.
+  Set Recheck for anything that changes: prices, counts in live databases, policies, pledges,
+  rankings, software versions, free tiers. `scripts/check.sh` reports claims past their Recheck.
+- **Attribution.** State a claim as its source's claim ("X report", "X estimate") unless it is a
+  measurement anyone could repeat. A source's framing is not a fact.
+- **Inferences** are claims too: Kind `inference`, Attributed to `this project`, Depends on the claims
+  they rest on. Outputs phrase them as inference.
+- **Status.** `supported`: in every listed source on the stated scope and period. `contested`:
+  sources on the same scope and period disagree; Note says how. `unsupported`: asserted somewhere,
+  found in no retrieved source; kept so outputs can say so.
+- **Human `wrong`** blocks every output citing the claim until it is fixed.
+- **IDs are permanent.** A deleted claim's ID is not reused.
+- `scripts/check.sh` fails on a cited ID missing from the ledger, a claim missing a required field, a
+  claim citing a missing source file, or a claim a human marked `wrong`.
 
 ## Source hierarchy
 
@@ -261,18 +310,23 @@ before starting.
 
 | The user asks for | Skill | Output template |
 |-------------------|-------|-----------------|
+| continuing, "where were we", what is pending | `resume` | none |
 | research on a topic with no project yet | `new-project`, then one below | `templates/brief.md` |
 | getting up to speed, "what do we know about X" | `background-research` | `templates/outputs/briefing.md` |
-| a literature, systematic, or evidence review | `lit-review` | `templates/outputs/review.md` |
-| the debate, the positions, stakeholders, both sides | `perspectives` | `templates/outputs/perspectives.md` |
+| what the research says, a systematic review | `lit-review` | `templates/outputs/review.md` |
+| what research exists, how X is defined or studied | `scoping-review` | `templates/outputs/scoping-review.md` |
+| an evidence answer by a deadline | `rapid-review` | `templates/outputs/rapid-review.md` |
+| where evidence exists and where it does not, by category | `evidence-gap-map` | `templates/outputs/evidence-gap-map.md` |
+| the debate, the positions, stakeholders, both sides | `positions-map` | `templates/outputs/positions-map.md` |
+| what a decision-maker should consider, options | `policy-brief` | `templates/outputs/policy-brief.md` |
 | a review, critique, or fact-check of one document | `source-review` | `templates/outputs/source-review.md` |
+| a human spot-check of findings | `sanity-check` | `templates/sanity-check.md` |
 | a check before sharing, or an update to a project | `verify`, then `METHOD.md` | none; reports in conversation |
-| checking findings before an output is written or shared | `sanity-check` | `templates/sanity-check.md` |
 
 Every skill writes source files with `templates/source.md` and claims with `templates/claims.md`.
-Output types with no skill yet (scoping review, rapid review, evidence gap map, policy brief):
-see `projects/research-output-types/outputs/briefing.md` for their definitions, adapt the nearest
-skill, and state the adaptation in the output's Method section.
+Output types with no skill yet (umbrella review, meta-analysis, qualitative evidence synthesis,
+realist review): see `projects/research-output-types/outputs/briefing.md` and the 48 types in its
+source `002`, adapt the nearest skill, and state the adaptation in the output's Method section.
 
 ## Scripts
 
@@ -284,6 +338,7 @@ tier that fills the gap (`tools/search-providers.md`).
 | Script | Does |
 |--------|------|
 | `scripts/keys.sh` | which providers are usable with the keys present; run first |
+| `scripts/status.sh [slug]` | every project's claims, human checks, assumed decisions, recheck dates, and what waits on the human |
 | `scripts/search.sh academic\|web\|news "<query>" [n]` | search, choosing a provider by the keys present; or name one: `openalex`, `arxiv`, `crossref`, `europepmc`, `core`, `semanticscholar`, `tavily`, `serper`, `scholar`, `serpapi`, `serpapi-scholar`, `brave`, `exa`, `jina` |
 | `scripts/doi.sh <doi>` | confirm a record on Crossref; find OA copies via Unpaywall and Semantic Scholar |
 | `scripts/fetch.sh <url> [out]` | URL to text: `pdftotext` for PDFs, then Jina, Tavily, Exa as keys allow; exits 4 if all are blocked |

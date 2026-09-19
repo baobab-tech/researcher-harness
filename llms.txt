@@ -11,22 +11,28 @@ Read AGENTS.md first, then the SKILL.md for the task. Stop at every CHECKPOINT t
 
 ## Skills
 
-- [new-project](skills/new-project/SKILL.md): scaffold projects/<slug>/ from a question
+- [resume](skills/resume/SKILL.md): session start; project state and what waits on the human
+- [new-project](skills/new-project/SKILL.md): intent interview, then scaffold projects/<slug>/
 - [background-research](skills/background-research/SKILL.md): orientation briefing on an unfamiliar topic
-- [lit-review](skills/lit-review/SKILL.md): systematic or scoping literature review
-- [perspectives](skills/perspectives/SKILL.md): map positions on a contested question
+- [lit-review](skills/lit-review/SKILL.md): systematic literature review
+- [scoping-review](skills/scoping-review/SKILL.md): map what evidence exists, without appraisal
+- [rapid-review](skills/rapid-review/SKILL.md): systematic review with agreed, declared shortcuts
+- [evidence-gap-map](skills/evidence-gap-map/SKILL.md): matrix of where evidence exists and where it does not
+- [positions-map](skills/positions-map/SKILL.md): who argues what on a contested question, and on what evidence
+- [policy-brief](skills/policy-brief/SKILL.md): problem, options, implementation for a decision-maker
 - [source-review](skills/source-review/SKILL.md): critique or fact-check one document
+- [sanity-check](skills/sanity-check/SKILL.md): the human spot-checks claims against sources
 - [verify](skills/verify/SKILL.md): audit a project before sharing or updating
-- [sanity-check](skills/sanity-check/SKILL.md): human spot-check packet of claims before an output is shared
 
 ## Templates
 
 - [brief](templates/brief.md), [source](templates/source.md), [claims](templates/claims.md), [notes](templates/notes.md), [checkpoint](templates/checkpoint.md), [sanity-check](templates/sanity-check.md), [index](templates/index.md), [log](templates/log.md), [queue](templates/queue.md), [project README](templates/project-readme.md)
-- Outputs: [briefing](templates/outputs/briefing.md), [review](templates/outputs/review.md), [perspectives](templates/outputs/perspectives.md), [source-review](templates/outputs/source-review.md)
+- Outputs: [briefing](templates/outputs/briefing.md), [review](templates/outputs/review.md), [scoping-review](templates/outputs/scoping-review.md), [rapid-review](templates/outputs/rapid-review.md), [evidence-gap-map](templates/outputs/evidence-gap-map.md), [positions-map](templates/outputs/positions-map.md), [policy-brief](templates/outputs/policy-brief.md), [source-review](templates/outputs/source-review.md)
 
 ## Tools
 
 - [scripts/keys.sh](scripts/keys.sh): run first; every key is optional
+- [scripts/status.sh](scripts/status.sh): every project's state and what waits on the human
 - [scripts/search.sh](scripts/search.sh), [scripts/doi.sh](scripts/doi.sh), [scripts/fetch.sh](scripts/fetch.sh), [scripts/check.sh](scripts/check.sh)
 - [tools/search-providers.md](tools/search-providers.md): providers, free tiers, fallbacks when keys are missing
 - [tools/verification.md](tools/verification.md): failure modes the rules prevent

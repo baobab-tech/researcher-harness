@@ -1,4 +1,4 @@
-# [Question]: perspectives
+# [Question]: positions map
 
 **Retrieved:** YYYY-MM-DD · [Index](../_index.md) · [Claims](../claims.md)
 

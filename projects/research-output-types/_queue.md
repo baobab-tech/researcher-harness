@@ -17,7 +17,6 @@ Last updated: 2026-09-19
 
 - Sanity check: C008, C011, C016 in `outputs/_sanity-check.md` not yet checked (quick mode chosen)
 - Confirm assumed design decisions in `brief.md`
-- Rename `perspectives` skill?
 
 ## Blocked
 

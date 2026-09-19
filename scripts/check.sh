@@ -51,21 +51,41 @@ grep -h '^\*\*URL:\*\*' "${files[@]}" /dev/null 2>/dev/null | sed 's/^\*\*URL:\*
 grep -lniE 'supersede|correction needed|previously stated|corrected excerpt' \
   "${files[@]}" "$p/README.md" "$p"/outputs/*.md 2>/dev/null | sed 's/^/CHANGELOG TEXT in /' | grep . && fail=1
 
-# 9. Claims ledger: unique IDs, source files exist, every cited ID is defined
+# 9. Claims ledger: IDs, required fields, source links, cited IDs, human marks, recheck dates
 if [ -f "$p/claims.md" ]; then
-  ids=$(grep -oE "^\| C[0-9]{3} " "$p/claims.md" | tr -d "| ")
+  ids=$(grep -oE "^### C[0-9]{3}" "$p/claims.md" | cut -c5-)
   dup=$(echo "$ids" | sort | uniq -d); [ -n "$dup" ] && flag "DUPLICATE CLAIM ID: $dup"
   grep -oE "sources/[0-9]{3}-[^)| ]+\.md" "$p/claims.md" | sort -u | while read -r s; do
     [ -f "$p/$s" ] || echo "CLAIM CITES MISSING FILE: $s"
   done | grep . && fail=1
-  grep -ohE "\[C[0-9]{3}\]" "$p/README.md" "$p"/outputs/*.md 2>/dev/null | tr -d "[]" | sort -u | while read -r c; do
-    echo "$ids" | grep -qx "$c" || echo "UNDEFINED CLAIM $c cited in outputs"
-  done | grep . && fail=1
-  echo "claims: $(echo "$ids" | grep -c .) defined, $(grep -ohE "\[C[0-9]{3}\]" "$p/README.md" "$p"/outputs/*.md 2>/dev/null | sort -u | wc -l | tr -d " ") cited"
   cited=$(grep -ohE "\[C[0-9]{3}\]" "$p/README.md" "$p"/outputs/*.md 2>/dev/null | tr -d "[]" | sort -u)
-  human=$(awk -F"|" -v c="$(echo $cited)" 'BEGIN{n=split(c,a," ");for(i=1;i<=n;i++)w[a[i]]=1} $2~/C[0-9]/{id=$2;gsub(/ /,"",id); if(w[id]&&$9~/confirmed/)k++} END{print k+0}' "$p/claims.md")
-  echo "human-confirmed: $human of the cited claims"
-  awk -F"|" '$2~/C[0-9]/ && $9~/wrong/{gsub(/ /,"",$2); print "CLAIM MARKED WRONG BY HUMAN: " $2}' "$p/claims.md" | grep . && fail=1
+  for c in $cited; do echo "$ids" | grep -qx "$c" || echo "UNDEFINED CLAIM $c cited in outputs"; done | grep . && fail=1
+  ctmp=$(mktemp)
+  awk -v today="$(date +%Y-%m)" -v cited=" $(echo $cited) " '
+    function finish() {
+      if (id == "") return
+      n = split("Statement Scope Period Attributed_to Kind Sources Status Checked Recheck Human", req, " ")
+      for (i = 1; i <= n; i++) { k = req[i]; gsub(/_/, " ", k)
+        if (!(k in f)) print "MISSING FIELD " k " in " id
+        else if (f[k] == "" && k != "Human") print "EMPTY FIELD " k " in " id }
+      if (f["Kind"] != "inference" && f["Quote"] == "") print "NO QUOTE in " id
+      if (f["Kind"] == "inference" && f["Depends on"] == "") print "INFERENCE WITHOUT Depends on in " id
+      if (f["Human"] ~ /^wrong/) print "CLAIM MARKED WRONG BY HUMAN: " id
+      if (f["Recheck"] ~ /^[0-9][0-9][0-9][0-9]-[0-9][0-9]/ && substr(f["Recheck"],1,7) < today) print "RECHECK DUE " id " (" f["Recheck"] ")"
+      if (index(cited, " " id " ")) { nc++; if (f["Human"] ~ /^confirmed/) nh++ }
+      total++
+      split("", f)
+    }
+    /^### C[0-9][0-9][0-9]/ { finish(); id = substr($2, 1, 4); next }
+    id != "" && /^- \*\*[A-Za-z ]+:\*\*/ {
+      line = $0; sub(/^- \*\*/, "", line); k = line; sub(/:\*\*.*/, "", k)
+      v = line; sub(/^[^*]*:\*\* ?/, "", v); f[k] = v
+    }
+    END { finish(); printf "claims: %d defined, %d cited, %d of the cited human-confirmed\n", total, nc, nh }
+  ' "$p/claims.md" > "$ctmp" 2>&1 || true
+  grep -vE "^claims:|^RECHECK DUE" "$ctmp" | grep . && fail=1
+  grep -E "^claims:|^RECHECK DUE" "$ctmp"
+  rm -f "$ctmp"
   [ -f "$p/brief.md" ] && grep -qE "\| *assumed *\| *$" "$p/brief.md" && echo "NOTE: brief.md has assumed decisions awaiting the human"
 else
   echo "no claims.md"

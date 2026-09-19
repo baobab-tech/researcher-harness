@@ -27,17 +27,23 @@ means.
 2. **Read [AGENTS.md](AGENTS.md).** It holds the rules: human-in-the-loop checkpoints, source
    hierarchy, hard rules, evidence layers, working files, the claims ledger, writing style.
 
-3. **Pick the skill for the task** and read its `SKILL.md`:
+3. **Pick the skill for the task** and read its `SKILL.md`. In a repo that already has projects,
+   start with `resume`:
 
    | The user asks for | Skill | Output template |
    |-------------------|-------|-----------------|
-   | research on a topic with no project yet | [new-project](skills/new-project/SKILL.md), then one below | [brief](templates/brief.md) |
+   | continuing, what is pending | [resume](skills/resume/SKILL.md) | none |
+   | research on a topic with no project yet | [new-project](skills/new-project/SKILL.md) | [brief](templates/brief.md) |
    | getting up to speed, "what do we know about X" | [background-research](skills/background-research/SKILL.md) | [briefing](templates/outputs/briefing.md) |
-   | a literature, systematic, or scoping review | [lit-review](skills/lit-review/SKILL.md) | [review](templates/outputs/review.md) |
-   | the debate, the positions, both sides | [perspectives](skills/perspectives/SKILL.md) | [perspectives](templates/outputs/perspectives.md) |
+   | what the research says, a systematic review | [lit-review](skills/lit-review/SKILL.md) | [review](templates/outputs/review.md) |
+   | what research exists, how X is defined or studied | [scoping-review](skills/scoping-review/SKILL.md) | [scoping-review](templates/outputs/scoping-review.md) |
+   | an evidence answer by a deadline | [rapid-review](skills/rapid-review/SKILL.md) | [rapid-review](templates/outputs/rapid-review.md) |
+   | where evidence exists and where it does not | [evidence-gap-map](skills/evidence-gap-map/SKILL.md) | [evidence-gap-map](templates/outputs/evidence-gap-map.md) |
+   | the debate, the positions, both sides | [positions-map](skills/positions-map/SKILL.md) | [positions-map](templates/outputs/positions-map.md) |
+   | options for a decision-maker | [policy-brief](skills/policy-brief/SKILL.md) | [policy-brief](templates/outputs/policy-brief.md) |
    | a critique or fact-check of one document | [source-review](skills/source-review/SKILL.md) | [source-review](templates/outputs/source-review.md) |
-   | a check before sharing, or an update | [verify](skills/verify/SKILL.md) and [METHOD.md](METHOD.md) | none |
    | a human spot-check of findings | [sanity-check](skills/sanity-check/SKILL.md) | [sanity-check](templates/sanity-check.md) |
+   | a check before sharing, or an update | [verify](skills/verify/SKILL.md) | [METHOD.md](METHOD.md) |
 
 4. **Check your tools.** `bash`, `curl`, `jq`, `pdftotext`. Run `scripts/keys.sh`: every API key is
    optional, academic search and fetching work with none, and the scripts pick whichever providers
@@ -55,6 +61,7 @@ means.
 
 | Checkpoint | The agent brings | The human decides |
 |------------|------------------|-------------------|
+| resume | every project's state and pending items | which project, what to clear first |
 | intent | its reading of the request | purpose, audience, priors, material to share, involvement level |
 | design | a draft brief and method options | question wording, method, scope, trusted sources |
 | early findings | first sources, counts, borderline cases | direction, inclusion rulings |
@@ -73,7 +80,7 @@ An unattended run records its defaults as `assumed` and says so in the output.
 fetch            extract             assert               write
   │                 │                   │                    │
 .cache/NNN.txt → sources/NNN-*.md → claims.md [C001] → outputs/*.md
- raw full text    one per source     one row per claim   prose citing claim IDs
+ raw full text    one per source     one block per claim prose citing claim IDs
  (gitignored)     boundary, funding  status: supported,  every number carries
                   limits, URL        contested,          an ID
                                      unsupported
@@ -92,6 +99,7 @@ briefing on the kinds of task and output researchers produce, with its
 | Script | Does | Keys |
 |--------|------|------|
 | `scripts/keys.sh` | lists usable providers for the keys present | none |
+| `scripts/status.sh [slug]` | project state and what waits on the human | none |
 | `scripts/search.sh academic "<q>" [n]` | OpenAlex; also `arxiv`, `crossref`, `europepmc`, `core`, `semanticscholar` | none |
 | `scripts/search.sh web "<q>" [n]` | first keyed provider among Tavily, Serper, SerpApi, Brave, Exa, Jina | any one |
 | `scripts/search.sh news "<q>" [n]` | Tavily news or Serper news | either |
@@ -140,3 +148,11 @@ Nothing below is decided.
 - **A shared data layer** of verified source records and claims across projects, so a paper checked
   once is not re-checked from scratch.
 - **A product** built on the same method.
+
+## Licence
+
+Documentation, skills, templates, and project content: [CC BY 4.0](LICENSE). Scripts in
+[scripts/](scripts/): [MIT](scripts/LICENSE). Copyright 2026 Baobab Tech.
+
+Quotations in project source files remain the property of their authors and are included as short
+excerpts for verification. Cached full texts (`projects/*/.cache/`) are not committed.

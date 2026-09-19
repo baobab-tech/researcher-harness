@@ -36,7 +36,7 @@ reviews)? Which of these should the harness support as skills?
 
 - **Method against product.** A review type names a process; an evidence brief or policy brief names a package for a reader. Sutton et al. 2019 left product labels off their list on this ground.
 - **Map against answer.** Scoping reviews and evidence maps describe what evidence exists; systematic reviews appraise it to answer a question.
-- **Perspective article against perspectives map.** In journal usage a Perspective is one author's viewpoint. This harness's `perspectives` skill maps several parties' positions.
+- **Perspective article against perspectives map.** In journal usage a Perspective is one author's viewpoint. This harness's `positions-map` skill maps several parties' positions.
 
 ## Canonical primary sources
 

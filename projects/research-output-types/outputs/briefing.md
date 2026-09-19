@@ -95,8 +95,8 @@ C004 was narrowed before confirmation ([_sanity-check.md](_sanity-check.md)).
   on any method.
 - **Map against answer.** Scoping reviews and EGMs describe the evidence; systematic reviews
   appraise it and answer a question.
-- **Perspective against perspectives map.** A journal Perspective is one author's view. The
-  harness's `perspectives` skill maps several parties' positions, closer to a stakeholder analysis.
+- **Perspective against positions map.** A journal Perspective is one author's view. The
+  harness's `positions-map` skill maps several parties' positions, closer to a stakeholder analysis.
 
 ## Gaps
 
@@ -112,5 +112,5 @@ Booth 2009 was blocked by Cloudflare; its list comes from Price 2022.
 | Process support | `source-review`, `verify`, `background-research` | `search-protocol`, `screen`, `extract`, `appraise`, `citation-chase` |
 | Syntheses | `lit-review` | `systematic-review`, `rapid-review`, `umbrella-review`, `narrative-review`, `meta-analysis` |
 | Maps | none | `scoping-review`, `evidence-gap-map` |
-| Viewpoints | `perspectives` (positions map) | `perspective-piece`, `comment` |
+| Viewpoints | `positions-map` | `perspective-piece`, `comment` |
 | Decision support | none | `policy-brief`, `evidence-brief` |

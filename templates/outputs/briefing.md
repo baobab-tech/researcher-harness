@@ -29,4 +29,4 @@
 
 ## Where to go next
 
-[Sub-questions worth a lit-review or perspectives pass.]
+[Sub-questions worth a lit review or positions map.]

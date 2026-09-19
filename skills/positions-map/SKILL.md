@@ -1,16 +1,16 @@
 ---
-name: perspectives
-description: Map the positions on a contested question - who holds each view, the evidence and interests behind it, and whether each disagreement is empirical, definitional, or about values - with the human checking that each position is fairly stated, producing projects/<slug>/outputs/perspectives.md. Use when the user asks for perspectives, viewpoints, stakeholder positions, both sides, the debate on X, or a steelman.
+name: positions-map
+description: Map the positions on a contested question - who holds each view, the evidence and interests behind it, and whether each disagreement is empirical, definitional, or about values - with the human checking that each position is fairly stated, producing projects/<slug>/outputs/positions-map.md. Use when the user asks for perspectives, viewpoints, stakeholder positions, both sides, the debate on X, or a steelman.
 ---
 
-# Perspectives
+# Positions map
 
 Represent each position as its strongest proponents would, then show what evidence each rests on
 and where positions actually conflict. This is a positions map, not a single-author Perspective
 article.
 
 Requires `projects/<slug>/brief.md` with intent and design recorded; run `new-project` first if
-missing. Output template: `templates/outputs/perspectives.md`.
+missing. Output template: `templates/outputs/positions-map.md`.
 
 1. **Find positions in their holders' own words:** papers, consultation submissions, testimony,
    position papers, filings, official statements. Commentary about a position is a lead, not a
@@ -34,7 +34,7 @@ missing. Output template: `templates/outputs/perspectives.md`.
    position, and ask the human whether each position's strongest argument is stated as its holders
    would state it.
 
-7. **Write** `outputs/perspectives.md` from the template, with the same scrutiny for every position.
+7. **Write** `outputs/positions-map.md` from the template, with the same scrutiny for every position.
 
 8. **CHECKPOINT: draft.** Ask specifically whether any position reads weaker or stronger than its
    evidence. Revise.

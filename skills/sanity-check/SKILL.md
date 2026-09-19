@@ -59,7 +59,7 @@ and comments back from the file or artifact.
 
 ## 4. Record
 
-- `claims.md`, `Human` column: `confirmed YYYY-MM-DD`, `wrong`, or `unsure`, with the note in Note.
+- `claims.md`, each claim's `Human` field: `confirmed YYYY-MM-DD`, `wrong`, or `unsure`, with the note in Note.
 - `wrong`: fix the source file and the claim, then re-check every output citing it. If the error
   came from a pattern (a misread table, a wrong boundary), check the other claims from that source.
 - A note asking for nuance or a narrower reading counts as `wrong`: revise the claim and every

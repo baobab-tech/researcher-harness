@@ -1,6 +1,6 @@
 ---
 name: new-project
-description: Start a research project under projects/<slug>/ by interviewing the human about intent, then scaffolding from templates. Use when the user starts research on a new topic, or asks for a review, briefing, perspectives map, or source review on something that has no project yet.
+description: Start a research project under projects/<slug>/ by interviewing the human about intent, then scaffolding from templates. Use when the user starts research on a new topic, or asks for a review, briefing, map, positions map, policy brief, or source review on something that has no project yet.
 ---
 
 # New project

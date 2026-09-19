@@ -23,7 +23,8 @@ missing. Output template: `templates/outputs/briefing.md`.
    .cache/NNN.txt` to save the text, then `sources/NNN-*.md` from `templates/source.md`. Include
    anything in `inputs/`.
 
-4. **Record claims** in `claims.md`, each checked against the cached text.
+4. **Record claims** in `claims.md`, one block each with scope, period, attribution, kind, and the
+   quote from the cached text (Claims ledger, `AGENTS.md`).
 
 5. **Find the disputes.** For each contested claim, find who holds each position and check with
    boundary arithmetic whether the disagreement is real (`tools/verification.md`). Anything that
@@ -38,5 +39,5 @@ missing. Output template: `templates/outputs/briefing.md`.
    missing. Revise.
 
 9. **Close.** Rebuild `_index.md` and `README.md`, run `scripts/check.sh <slug>`, update
-   `_queue.md`. **CHECKPOINT: handoff.** Propose next steps (a lit review or perspectives pass on a
+   `_queue.md`. **CHECKPOINT: handoff.** Propose next steps (a lit review or positions map on a
    sub-question) and list what is waiting on them.

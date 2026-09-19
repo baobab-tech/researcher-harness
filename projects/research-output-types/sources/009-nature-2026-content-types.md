@@ -38,7 +38,7 @@ One publisher; other publishers use the same labels with different rules. Page u
 
 ## Relation to other sources
 
-The journal "Perspective" names a single-author viewpoint; the harness's `perspectives` skill maps
+The journal "Perspective" names a single-author viewpoint; the harness's `positions-map` skill maps
 multiple parties' positions.
 
 ---
