@@ -18,6 +18,11 @@ What researchers produce, from process steps to finished outputs. 9 sources.
 The typologies are health-centred. Typologies classify methods; policy and evidence briefs are
 products that sit on top of a method and are excluded from them.
 
+## Human review
+
+0 of the cited claims human-confirmed. [Sanity-check packet](outputs/_sanity-check.md) awaiting answers;
+three design decisions assumed ([brief](brief.md)).
+
 ## Gaps
 
 No retrieved source covers horizon scanning, landscape analysis, stakeholder analysis, or Delphi

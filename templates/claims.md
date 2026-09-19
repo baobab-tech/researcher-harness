@@ -10,5 +10,8 @@ Status values:
 - `contested`: sources disagree on the same boundary; the Note says how
 - `unsupported`: a claim made by someone that no retrieved source supports; kept so outputs can say so
 
-| ID | Claim | Value | Boundary | Sources | Status | Checked | Note |
-|----|-------|-------|----------|---------|--------|---------|------|
+The `Human` column records a person's spot-check: `confirmed YYYY-MM-DD`, `wrong` (fix before any output
+uses it), `unsure`, or blank for unchecked. Only a human writes to it.
+
+| ID | Claim | Value | Boundary | Sources | Status | Checked | Human | Note |
+|----|-------|-------|----------|---------|--------|---------|-------|------|

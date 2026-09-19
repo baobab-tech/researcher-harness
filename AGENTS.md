@@ -7,6 +7,80 @@ Cowork, or another agent. Each research project lives in `projects/<slug>/` and 
 Process skills live in `skills/<name>/SKILL.md`; API and retrieval references live in `tools/`;
 executable tools live in `scripts/`. `CLAUDE.md` and `.claude/skills` are symlinks to these for Claude Code.
 
+## Human in the loop
+
+The human owns the question, the design, and the judgment on what the evidence means. The agent
+does the searching, reading, extraction, and bookkeeping, and stops at checkpoints to hand
+decisions back. A pass that runs start to finish without the human is a failed pass, however good
+its sources.
+
+### Checkpoints
+
+Every skill marks its stops as **CHECKPOINT: <name>**. At each one, send a message in the format of
+`templates/checkpoint.md`, then wait.
+
+| Checkpoint | When | Ask about |
+|------------|------|-----------|
+| **intent** | before anything else | purpose, the decision or use it feeds, audience, what they already know or believe, material they hold, what done looks like |
+| **design** | before searching | question wording, sub-questions, method (see below), scope, criteria, sources they trust or distrust, named documents and people they know |
+| **early findings** | after the first 3 to 5 sources | whether the direction, source mix, and depth are right; surprises so far |
+| **sanity check** | before writing outputs | a packet of claims to spot-check against sources (`templates/sanity-check.md`) |
+| **draft** | after the output draft | framing, emphasis, what is stated too strongly, what is missing |
+| **handoff** | before stopping | what is next, what is waiting on them |
+
+Also stop, outside the schedule, when:
+
+- a finding contradicts the human's stated priors or the brief's assumptions
+- a source is blocked and a decision is needed on how to proceed
+- scope needs to grow or shrink
+- two credible sources disagree and the brief does not say which boundary governs
+
+### How to ask
+
+- **Ask what files cannot settle.** Read `brief.md`, `_queue.md`, and the decisions log first.
+- **Batch.** One message per checkpoint, at most five questions, numbered.
+- **Offer options and a default.** Say what you will do if there is no answer.
+- **Show your work.** Link the files you wrote so the human can read before answering.
+- **Ask for their material.** Documents, data, prior research, notes, contacts. Save what they
+  share to `inputs/` and log it. Human-provided material is evidence to check like any other, and
+  a lead to follow.
+- **Dig at intent.** A request names a topic; the intent is the decision behind it. "Why now?",
+  "What would change your mind?", "Who will read this?" often reshape the question.
+
+### Record every answer
+
+Answers go in the Decisions table of `brief.md`, with date, checkpoint, and who answered. When no
+human answers (an unattended run), choose the default, record it as `assumed`, carry it into
+`_queue.md` under "Waiting on the human", and list it in the output's Human review section. Never
+present an assumed decision as the human's.
+
+### Involvement level
+
+`brief.md` sets it at the intent checkpoint:
+
+- **high**: every checkpoint
+- **standard** (default): intent, design, sanity check, draft
+- **light**: intent and sanity check
+
+The sanity check is never skipped. No output is shared without a human having spot-checked a
+sample of its claims, or the output saying plainly that none were checked.
+
+### Method is a design decision
+
+At the design checkpoint, offer the methods that fit the question and let the human choose:
+
+| If the question is | Offer |
+|--------------------|-------|
+| "what exists on X" | scoping review, evidence map, background briefing |
+| "does X work / how large is X" | systematic review, rapid review |
+| "what do reviews already say" | umbrella review |
+| "who argues what" | perspectives map |
+| "is this document right" | source review |
+| "what should we do" | policy brief built on one of the above |
+
+Definitions and trade-offs: `projects/research-output-types/outputs/briefing.md`. Record the choice
+and any adaptation in `brief.md` and in the output's Method section.
+
 **Before any work on an existing project:** read its `brief.md`, `_queue.md`, and
 [METHOD.md](METHOD.md). An update is audit, search, verify, prune, rebuild. A pass that only adds
 new sources leaves the existing material wrong and every summary built on it wrong.
@@ -36,10 +110,12 @@ projects/<slug>/
   sources/        NNN-author-year-topic.md, one per finding       templates/source.md
   outputs/        briefing, review, perspectives, source reviews  templates/outputs/
   _work/          working notes, one file per task or subagent    templates/notes.md
+  inputs/         material the human provides                     checkpoint answers
   .cache/         raw fetched text, gitignored                    scripts/fetch.sh
 ```
 
-Start one with the `new-project` skill. Copy templates; do not write these files from memory.
+Start one with the `new-project` skill. Checkpoint messages follow `templates/checkpoint.md`; sanity-check
+packets follow `templates/sanity-check.md`. Copy templates; do not write these files from memory.
 
 ## Evidence layers
 
@@ -73,6 +149,8 @@ Agents lose context; files do not. Write state down as you go.
   and the log when the task ends, then delete it.
 - **Subagents** each get a brief, a starting file number, and exclusive ownership of the files they
   write. Only the orchestrator edits `_index.md`, `claims.md`, `README.md`, and `outputs/`.
+  Subagents never contact the human: they put questions in their notes file's "Report back"
+  section, and the orchestrator batches them into the next checkpoint.
 
 ## Claims ledger
 
@@ -82,6 +160,8 @@ Agents lose context; files do not. Write state down as you go.
 - `supported`: found in every listed source on the stated boundary.
 - `contested`: sources on the same boundary disagree. The note says how.
 - `unsupported`: asserted somewhere, found in no retrieved source. Kept so outputs can say so.
+- `Human` records a person's spot-check: `confirmed YYYY-MM-DD`, `wrong`, `unsure`, or blank. Only a
+  human answer fills it. A `wrong` claim is fixed before any output cites it.
 - IDs are permanent. A deleted claim's ID is not reused.
 - `scripts/check.sh` fails on a cited ID missing from the ledger or a ledger row citing a missing file.
 
@@ -173,6 +253,7 @@ before starting.
 | the debate, the positions, stakeholders, both sides | `perspectives` | `templates/outputs/perspectives.md` |
 | a review, critique, or fact-check of one document | `source-review` | `templates/outputs/source-review.md` |
 | a check before sharing, or an update to a project | `verify`, then `METHOD.md` | none; reports in conversation |
+| checking findings before an output is written or shared | `sanity-check` | `templates/sanity-check.md` |
 
 Every skill writes source files with `templates/source.md` and claims with `templates/claims.md`.
 Output types with no skill yet (scoping review, rapid review, evidence gap map, policy brief):

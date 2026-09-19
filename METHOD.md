@@ -31,9 +31,10 @@ has usually been repeated.
 
 ### Phase 1. Ask before scoping
 
-Decisions that belong to the user: breadth, recency window, which source types are admitted,
-which sub-questions come first, whether outputs get rewritten. Ask once, with the audit attached.
-Do not ask about anything `brief.md` already settles.
+This is the intent and design checkpoint (`AGENTS.md`, Human in the loop). Decisions that belong to
+the human: breadth, recency window, which source types are admitted, which sub-questions come
+first, whether outputs get rewritten. Ask once, with the audit attached. Do not ask about anything
+`brief.md` already settles.
 
 ### Phase 2. Search in parallel, one agent per sub-question
 
@@ -46,6 +47,11 @@ Give every agent:
 
 Agents write only their own source files. They do not edit `_index.md`, `README.md`, or
 `outputs/`; the orchestrator rebuilds those from the final file state.
+
+### Checkpoint after Phase 2
+
+Early findings: counts per sub-question, borderline sources, surprises. The human rules on
+borderline sources and redirects if needed.
 
 ### Phase 3. Verify what the summaries cite
 
@@ -63,6 +69,11 @@ Remove, in order:
 
 Removals are recoverable from git. The commit message records the reason.
 
+### Checkpoint after Phase 4
+
+Sanity check (`skills/sanity-check/SKILL.md`): the human spot-checks changed and load-bearing
+claims, and agrees to deletions of load-bearing files, before summaries are rebuilt.
+
 ### Phase 5. Rebuild summaries from the final state
 
 Regenerate `_index.md` from the files that exist. Rewrite `README.md` and any `outputs/` from the
@@ -76,7 +87,8 @@ collision, or an unresolvable URL.
 
 ### Phase 7. Commit
 
-One commit per phase group, with corrections named in the message.
+One commit per phase group, with corrections named in the message. Then the handoff checkpoint:
+what is next and what is waiting on the human.
 
 ## Subagent design
 

@@ -1,6 +1,6 @@
 ---
 name: background-research
-description: Fast orientation on an unfamiliar topic - terminology, actors, canonical primary sources, established figures, open disputes - producing projects/<slug>/outputs/briefing.md. Use when the user wants to get up to speed, needs background before deeper work, or asks "what do we know about X".
+description: Fast orientation on an unfamiliar topic - terminology, actors, canonical primary sources, established figures, open disputes - producing projects/<slug>/outputs/briefing.md, with the human checking direction and claims along the way. Use when the user wants to get up to speed, needs background before deeper work, or asks "what do we know about X".
 ---
 
 # Background research
@@ -8,22 +8,35 @@ description: Fast orientation on an unfamiliar topic - terminology, actors, cano
 Goal: a reader new to the topic can name its terms, actors, data sources, established facts, and
 live disputes, and knows where each claim comes from.
 
-Requires `projects/<slug>/brief.md`; run `new-project` first if missing. Output template:
-`templates/outputs/briefing.md`.
+Requires `projects/<slug>/brief.md` with intent and design recorded; run `new-project` first if
+missing. Output template: `templates/outputs/briefing.md`.
 
-1. **Map the field.** Two or three broad searches with `scripts/search.sh` (web, OpenAlex, a recent
-   review) to find the terms of art, the institutions that produce primary data, the main research
-   groups and interested parties, and the reviews or agency reports everyone cites. Log each search
-   in `_log.md`. Add the primary sources and distinctions you find to `brief.md`.
-2. **Pull the anchors.** For the recent reviews and primary sources: `scripts/doi.sh` to confirm
-   the record, `scripts/fetch.sh <url> .cache/NNN.txt` to save the text, then write
-   `sources/NNN-*.md` from `templates/source.md`. Aim for 5 to 15 sources; depth on anchors beats
-   breadth.
-3. **Record claims.** Each figure or statement the briefing will use becomes a row in `claims.md`,
-   checked against the cached text.
-4. **Find the disputes.** For each contested claim, find who holds each position and check with
-   boundary arithmetic whether the disagreement is real (`tools/verification.md`). Mark the claims
-   `contested` or `unsupported` as warranted.
-5. **Write** `outputs/briefing.md` from the template, citing claim IDs.
-6. **Close.** Rebuild `_index.md` and `README.md` from the files that exist, update `_queue.md`,
-   run `scripts/check.sh <slug>`.
+1. **Map the field.** Two or three broad searches with `scripts/search.sh` to find terms of art,
+   the institutions that produce primary data, the main research groups and interested parties,
+   and the reviews or agency reports everyone cites. Log each search.
+
+2. **CHECKPOINT: early findings** (involvement high or standard: fold into the next checkpoint if
+   light). Show the map: terms, actors, the 5 to 15 anchor sources you plan to read. Ask which are
+   missing, which they distrust, and whether any sub-question should change.
+
+3. **Pull the anchors.** `scripts/doi.sh` to confirm the record, `scripts/fetch.sh <url>
+   .cache/NNN.txt` to save the text, then `sources/NNN-*.md` from `templates/source.md`. Include
+   anything in `inputs/`.
+
+4. **Record claims** in `claims.md`, each checked against the cached text.
+
+5. **Find the disputes.** For each contested claim, find who holds each position and check with
+   boundary arithmetic whether the disagreement is real (`tools/verification.md`). Anything that
+   contradicts the human's stated priors: stop and tell them before writing it up.
+
+6. **CHECKPOINT: sanity check.** Run the `sanity-check` skill.
+
+7. **Write** `outputs/briefing.md` from the template, citing claim IDs, with the Human review
+   section filled.
+
+8. **CHECKPOINT: draft.** Ask about framing, emphasis, anything stated too strongly, anything
+   missing. Revise.
+
+9. **Close.** Rebuild `_index.md` and `README.md`, run `scripts/check.sh <slug>`, update
+   `_queue.md`. **CHECKPOINT: handoff.** Propose next steps (a lit review or perspectives pass on a
+   sub-question) and list what is waiting on them.

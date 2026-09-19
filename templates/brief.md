@@ -2,6 +2,18 @@
 
 **Created:** YYYY-MM-DD
 **Process:** [background-research | lit-review | perspectives | source-review | mixed]
+**Involvement:** [high: stop at every checkpoint | standard: intent, design, sanity check, draft | light: intent and sanity check]
+
+## Intent
+
+From the intent checkpoint, in the human's words where possible.
+
+- **Purpose:** [what the research is for]
+- **Decision or use it feeds:** [a decision, a paper, a grant, a talk, curiosity]
+- **Audience:** [who reads the output, and what they already know]
+- **What they already know or believe:** [priors and hypotheses, stated so the research can test them]
+- **Material they hold:** [documents, data, prior research; copied into `inputs/`]
+- **Done looks like:** [form, length, depth, deadline]
 
 ## Question
 
@@ -13,33 +25,34 @@
 
 ## Scope
 
-- **Recency window:** [e.g. 2020 onward]
-- **Geography / population:** ...
-- **Source types admitted:** [see the hierarchy in CLAUDE.md; note any adjustment]
-- **Out of scope:** ...
+- **Recency window:**
+- **Geography / population:**
+- **Source types admitted:** [see the hierarchy in AGENTS.md; note any adjustment]
+- **Out of scope:**
 
 ## Inclusion and exclusion criteria
 
-Used to screen sources. A source that fails one is logged in `_log.md` with the reason.
-
-- Include: ...
-- Exclude: ...
+- Include:
+- Exclude:
 
 ## Distinctions that matter here
 
-Pairs of quantities or concepts this literature conflates. Check these before calling two
-figures a disagreement.
+Pairs of quantities or concepts this literature conflates.
 
 - ...
 
 ## Canonical primary sources
 
-Agencies, datasets, registries, and document series that hold the defensible numbers in this field.
-
 - ...
 
 ## Core terms
 
-For `grep` relevance checks and search queries.
-
 - ...
+
+## Decisions
+
+Every checkpoint answer, and every default assumed when no answer came. Assumed entries stay
+marked until the human confirms them.
+
+| Date | Checkpoint | Question | Answer | By |
+|------|------------|----------|--------|----|

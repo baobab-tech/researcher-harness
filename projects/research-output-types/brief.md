@@ -2,6 +2,16 @@
 
 **Created:** 2026-09-19
 **Process:** background-research
+**Involvement:** light (assumed; the request asked for quick research)
+
+## Intent
+
+- **Purpose:** decide which task and output types the harness should support as skills
+- **Decision or use it feeds:** the harness skill set and routing table
+- **Audience:** the harness maintainers
+- **What they already know or believe:** "process support tasks like background deep research on a topic.. then there is full outputs like 'perspectives', 'scoping', 'systematic reviews'"
+- **Material they hold:** none shared
+- **Done looks like:** a quick categorisation, not a systematic review
 
 ## Question
 
@@ -37,3 +47,12 @@ reviews)? Which of these should the harness support as skills?
 ## Core terms
 
 review, typology, systematic, scoping, rapid, umbrella, mapping, evidence gap map, meta-analysis, perspective, comment, policy brief
+
+## Decisions
+
+| Date | Checkpoint | Question | Answer | By |
+|------|------------|----------|--------|----|
+| 2026-09-19 | intent | What is wanted? | Quick research on typical categories of research tasks and outputs, split into process support and full outputs | human |
+| 2026-09-19 | design | Source types admitted | Methods papers, review-organisation guidance, publisher author guides | assumed |
+| 2026-09-19 | design | Health-centred typologies acceptable as a start? | Yes; non-health typologies queued | assumed |
+| 2026-09-19 | design | Involvement level | light | assumed |

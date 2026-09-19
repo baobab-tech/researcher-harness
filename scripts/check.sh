@@ -62,6 +62,11 @@ if [ -f "$p/claims.md" ]; then
     echo "$ids" | grep -qx "$c" || echo "UNDEFINED CLAIM $c cited in outputs"
   done | grep . && fail=1
   echo "claims: $(echo "$ids" | grep -c .) defined, $(grep -ohE "\[C[0-9]{3}\]" "$p/README.md" "$p"/outputs/*.md 2>/dev/null | sort -u | wc -l | tr -d " ") cited"
+  cited=$(grep -ohE "\[C[0-9]{3}\]" "$p/README.md" "$p"/outputs/*.md 2>/dev/null | tr -d "[]" | sort -u)
+  human=$(awk -F"|" -v c="$(echo $cited)" 'BEGIN{n=split(c,a," ");for(i=1;i<=n;i++)w[a[i]]=1} $2~/C[0-9]/{id=$2;gsub(/ /,"",id); if(w[id]&&$9~/confirmed/)k++} END{print k+0}' "$p/claims.md")
+  echo "human-confirmed: $human of the cited claims"
+  awk -F"|" '$2~/C[0-9]/ && $9~/wrong/{gsub(/ /,"",$2); print "CLAIM MARKED WRONG BY HUMAN: " $2}' "$p/claims.md" | grep . && fail=1
+  [ -f "$p/brief.md" ] && grep -qE "\| *assumed *\| *$" "$p/brief.md" && echo "NOTE: brief.md has assumed decisions awaiting the human"
 else
   echo "no claims.md"
 fi

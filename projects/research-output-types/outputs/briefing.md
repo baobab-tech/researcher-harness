@@ -81,6 +81,12 @@ method [C004] ([002](../sources/002-sutton-2019-48-review-types-seven-families.m
 - **Analysis article.** No new data; a new analysis of existing data [C018]
   ([009](../sources/009-nature-2026-content-types.md)).
 
+## Human review
+
+Intent checkpoint: the request, recorded in [brief.md](../brief.md). Design decisions were assumed,
+not confirmed. Sanity check: packet sent ([_sanity-check.md](_sanity-check.md)); 0 claims
+human-confirmed so far.
+
 ## Distinctions
 
 - **Method against product.** "Scoping review" names a method; "policy brief" names a package. A

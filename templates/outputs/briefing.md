@@ -19,6 +19,10 @@
 
 [Each dispute: positions, who holds them, whether it is a real disagreement or a boundary mismatch. Cite claim IDs.]
 
+## Human review
+
+[Checkpoints run, claims a person confirmed out of those cited, assumed decisions still open.]
+
 ## Gaps
 
 [What no source establishes.]

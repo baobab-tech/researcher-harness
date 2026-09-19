@@ -10,6 +10,10 @@ Last updated: YYYY-MM-DD
 
 - [ ] ...
 
+## Waiting on the human
+
+[Open questions, requested material, unconfirmed assumed decisions, pending sanity checks.]
+
 ## Blocked
 
 [Sources that could not be retrieved, and why.]

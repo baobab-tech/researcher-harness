@@ -5,6 +5,11 @@ produce literature reviews, background briefings, perspective maps, and document
 number in an output traces through a claims ledger to a source file, and from there to the source's
 full text.
 
+The human stays in charge. Agents stop at named checkpoints to clarify intent, agree the design,
+review early findings, spot-check claims against sources, and review drafts. The agent does the
+searching, reading, and bookkeeping; the human decides what the question is and what the evidence
+means.
+
 **Version 0.** Markdown and bash only: no build step, no server, no SDK.
 
 ## If you are an agent
@@ -19,8 +24,8 @@ full text.
    `https://raw.githubusercontent.com/baobab-tech/researcher-harness/main/<path>`, starting with
    [llms.txt](llms.txt), and follow the method without the scripts.
 
-2. **Read [AGENTS.md](AGENTS.md).** It holds the rules: source hierarchy, hard rules, evidence
-   layers, working files, the claims ledger, writing style.
+2. **Read [AGENTS.md](AGENTS.md).** It holds the rules: human-in-the-loop checkpoints, source
+   hierarchy, hard rules, evidence layers, working files, the claims ledger, writing style.
 
 3. **Pick the skill for the task** and read its `SKILL.md`:
 
@@ -32,13 +37,32 @@ full text.
    | the debate, the positions, both sides | [perspectives](skills/perspectives/SKILL.md) | [perspectives](templates/outputs/perspectives.md) |
    | a critique or fact-check of one document | [source-review](skills/source-review/SKILL.md) | [source-review](templates/outputs/source-review.md) |
    | a check before sharing, or an update | [verify](skills/verify/SKILL.md) and [METHOD.md](METHOD.md) | none |
+   | a human spot-check of findings | [sanity-check](skills/sanity-check/SKILL.md) | [sanity-check](templates/sanity-check.md) |
 
 4. **Check your tools.** `bash`, `curl`, `jq`, `pdftotext`. API keys come from environment
    variables or a `.env` file at the repo root. Each script names a missing key and exits 3; work
    on with the keyless backends.
 
-5. **Copy templates; do not write project files from memory.** `scripts/check.sh <slug>` before
+5. **Stop at every CHECKPOINT** the skill names, using [templates/checkpoint.md](templates/checkpoint.md).
+   Start with the intent checkpoint: ask what the research is for before searching.
+
+6. **Copy templates; do not write project files from memory.** `scripts/check.sh <slug>` before
    you report back.
+
+## Human in the loop
+
+| Checkpoint | The agent brings | The human decides |
+|------------|------------------|-------------------|
+| intent | its reading of the request | purpose, audience, priors, material to share, involvement level |
+| design | a draft brief and method options | question wording, method, scope, trusted sources |
+| early findings | first sources, counts, borderline cases | direction, inclusion rulings |
+| sanity check | 5 to 10 claims with links and quotes | confirmed, wrong, or unsure for each |
+| draft | the output | framing, strength of claims, omissions |
+| handoff | state and next steps | what comes next |
+
+Answers are logged in each project's `brief.md`. The claims ledger records which claims a person
+confirmed, and `scripts/check.sh` reports the count and fails on any claim a person marked wrong.
+An unattended run records its defaults as `assumed` and says so in the output.
 
 ## How the evidence flows
 
@@ -54,7 +78,7 @@ fetch            extract             assert               write
 
 Alongside: `brief.md` (question and scope), `_log.md` (every search, including empty ones),
 `_queue.md` (state and next steps, the handoff between sessions), `_work/` (per-task scratch
-notes). Details in [AGENTS.md](AGENTS.md).
+notes), `inputs/` (material the human shares). Details in [AGENTS.md](AGENTS.md).
 
 A worked example: [projects/research-output-types](projects/research-output-types/), a 9-source
 briefing on the kinds of task and output researchers produce, with its

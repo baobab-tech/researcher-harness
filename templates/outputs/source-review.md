@@ -23,3 +23,7 @@
 ## Relation to other evidence
 
 [Other sources that confirm or contradict, if known.]
+
+## Human review
+
+[Checkpoints run, claims a person confirmed out of those cited, assumed decisions still open.]

@@ -16,6 +16,10 @@
 
 [Designs, samples, funding patterns, measured against modelled.]
 
+## Human review
+
+[Checkpoints run, claims a person confirmed out of those cited, assumed decisions still open.]
+
 ## Gaps
 
 [What no included source establishes.]

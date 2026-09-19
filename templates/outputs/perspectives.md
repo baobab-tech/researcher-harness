@@ -21,3 +21,7 @@
 ## Unsupported claims
 
 [Claims made by any side with status `unsupported` in claims.md.]
+
+## Human review
+
+[Checkpoints run, claims a person confirmed out of those cited, assumed decisions still open.]

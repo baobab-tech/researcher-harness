@@ -13,6 +13,12 @@ Last updated: 2026-09-19
 - [ ] Horizon scanning, landscape analysis, Delphi and consensus methods
 - [ ] Rapid evidence products: evidence briefs, rapid responses
 
+## Waiting on the human
+
+- Sanity check: 6 claims in `outputs/_sanity-check.md`
+- Confirm assumed design decisions in `brief.md`
+- Rename `perspectives` skill?
+
 ## Blocked
 
 - Grant & Booth 2009 and Sutton et al. 2019 full tables: Wiley and Salford serve Cloudflare interstitials

@@ -2,7 +2,7 @@
 
 > Research methods, verification rules, templates, and shell tools for AI agents producing literature reviews, background briefings, perspective maps, and document reviews. Every number in an output traces through a claims ledger to a source file and the source's full text.
 
-Read AGENTS.md first, then the SKILL.md for the task. Copy templates; do not write project files from memory. Paths are relative to https://raw.githubusercontent.com/baobab-tech/researcher-harness/main/
+Read AGENTS.md first, then the SKILL.md for the task. Stop at every CHECKPOINT the skill names and ask the human; start with intent. Copy templates; do not write project files from memory. Paths are relative to https://raw.githubusercontent.com/baobab-tech/researcher-harness/main/
 
 ## Rules
 
@@ -17,10 +17,11 @@ Read AGENTS.md first, then the SKILL.md for the task. Copy templates; do not wri
 - [perspectives](skills/perspectives/SKILL.md): map positions on a contested question
 - [source-review](skills/source-review/SKILL.md): critique or fact-check one document
 - [verify](skills/verify/SKILL.md): audit a project before sharing or updating
+- [sanity-check](skills/sanity-check/SKILL.md): human spot-check packet of claims before an output is shared
 
 ## Templates
 
-- [brief](templates/brief.md), [source](templates/source.md), [claims](templates/claims.md), [notes](templates/notes.md), [index](templates/index.md), [log](templates/log.md), [queue](templates/queue.md), [project README](templates/project-readme.md)
+- [brief](templates/brief.md), [source](templates/source.md), [claims](templates/claims.md), [notes](templates/notes.md), [checkpoint](templates/checkpoint.md), [sanity-check](templates/sanity-check.md), [index](templates/index.md), [log](templates/log.md), [queue](templates/queue.md), [project README](templates/project-readme.md)
 - Outputs: [briefing](templates/outputs/briefing.md), [review](templates/outputs/review.md), [perspectives](templates/outputs/perspectives.md), [source-review](templates/outputs/source-review.md)
 
 ## Tools
