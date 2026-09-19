@@ -1,0 +1,36 @@
+# Researcher Harness
+
+> Research methods, verification rules, templates, and shell tools for AI agents producing literature reviews, background briefings, perspective maps, and document reviews. Every number in an output traces through a claims ledger to a source file and the source's full text.
+
+Read AGENTS.md first, then the SKILL.md for the task. Copy templates; do not write project files from memory. Paths are relative to https://raw.githubusercontent.com/baobab-tech/researcher-harness/main/
+
+## Rules
+
+- [AGENTS.md](AGENTS.md): source hierarchy, hard rules, evidence layers, working files, claims ledger, style
+- [METHOD.md](METHOD.md): running a pass: audit, search, verify, prune, rebuild; subagent design
+
+## Skills
+
+- [new-project](skills/new-project/SKILL.md): scaffold projects/<slug>/ from a question
+- [background-research](skills/background-research/SKILL.md): orientation briefing on an unfamiliar topic
+- [lit-review](skills/lit-review/SKILL.md): systematic or scoping literature review
+- [perspectives](skills/perspectives/SKILL.md): map positions on a contested question
+- [source-review](skills/source-review/SKILL.md): critique or fact-check one document
+- [verify](skills/verify/SKILL.md): audit a project before sharing or updating
+
+## Templates
+
+- [brief](templates/brief.md), [source](templates/source.md), [claims](templates/claims.md), [notes](templates/notes.md), [index](templates/index.md), [log](templates/log.md), [queue](templates/queue.md), [project README](templates/project-readme.md)
+- Outputs: [briefing](templates/outputs/briefing.md), [review](templates/outputs/review.md), [perspectives](templates/outputs/perspectives.md), [source-review](templates/outputs/source-review.md)
+
+## Tools
+
+- [scripts/search.sh](scripts/search.sh), [scripts/doi.sh](scripts/doi.sh), [scripts/fetch.sh](scripts/fetch.sh), [scripts/check.sh](scripts/check.sh)
+- [tools/verification.md](tools/verification.md): failure modes the rules prevent
+- [tools/metadata.md](tools/metadata.md): Crossref, Unpaywall, Semantic Scholar; retrieval order around publisher blocks
+- [tools/primary-sources.md](tools/primary-sources.md): PDFs, official series, organisational disclosures
+
+## Optional
+
+- [tools/openalex-api-reference.md](tools/openalex-api-reference.md), [tools/arxiv-api-reference.md](tools/arxiv-api-reference.md), [tools/serper.md](tools/serper.md), [tools/jina.md](tools/jina.md), [tools/exa.md](tools/exa.md), [tools/archive.md](tools/archive.md)
+- [Example project](projects/research-output-types/outputs/briefing.md)

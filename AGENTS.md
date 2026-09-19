@@ -1,5 +1,7 @@
 # Agent Instructions
 
+Read this whole file before starting. Then pick a skill from the table under Skills.
+
 A research harness for any agent that can read files and run shell commands: Claude Code, Claude
 Cowork, or another agent. Each research project lives in `projects/<slug>/` and its output is markdown.
 Process skills live in `skills/<name>/SKILL.md`; API and retrieval references live in `tools/`;
@@ -25,16 +27,63 @@ new sources leaves the existing material wrong and every summary built on it wro
 
 ```
 projects/<slug>/
-  brief.md        question, scope, inclusion criteria, distinctions that matter in this field
-  README.md       summary of what the evidence establishes, rebuilt from sources/
-  _index.md       one row per source file
-  _log.md         searches run, including empty ones
-  _queue.md       current state and what is next
-  sources/        NNN-author-year-topic.md, one per finding
-  outputs/        deliverables: review, briefing, perspectives map
+  brief.md        question, scope, criteria, distinctions         templates/brief.md
+  _queue.md       current state and next steps                    templates/queue.md
+  _log.md         every search, including empty ones              templates/log.md
+  _index.md       one row per source file                         templates/index.md
+  claims.md       every claim outputs use, with its sources       templates/claims.md
+  README.md       what the evidence establishes                   templates/project-readme.md
+  sources/        NNN-author-year-topic.md, one per finding       templates/source.md
+  outputs/        briefing, review, perspectives, source reviews  templates/outputs/
+  _work/          working notes, one file per task or subagent    templates/notes.md
+  .cache/         raw fetched text, gitignored                    scripts/fetch.sh
 ```
 
-Start one with the `new-project` skill. Templates are in `templates/`.
+Start one with the `new-project` skill. Copy templates; do not write these files from memory.
+
+## Evidence layers
+
+Evidence moves through four layers. Each layer is written from the one below it, never from memory
+or from a summary.
+
+| Layer | Path | Contains | Written from |
+|-------|------|----------|--------------|
+| 0. Raw | `.cache/NNN.txt` | full text as fetched | `scripts/fetch.sh` |
+| 1. Source | `sources/NNN-*.md` | one source's findings, numbers, boundary, funding, limits | layer 0 |
+| 2. Claim | `claims.md` | one row per claim, citing layer-1 files, with a status | layer 1 |
+| 3. Output | `outputs/*.md`, `README.md` | prose for a reader, citing claim IDs `[C001]` | layer 2 |
+
+- Save every fetched full text to `.cache/` named by its source number. Verification re-reads it
+  there without refetching. It is gitignored because full texts are often copyrighted.
+- A claim enters `claims.md` only after its number or statement has been found in the layer-0 text.
+- Every number and factual statement in an output carries a claim ID. A sentence with no ID is the
+  author's own inference and reads as one ("this suggests", "taken together").
+- When a source file changes, re-check the claims that cite it and the outputs that cite those.
+  `grep -n "sources/NNN-" claims.md` finds them.
+
+## Working files
+
+Agents lose context; files do not. Write state down as you go.
+
+- **`_queue.md`** is the handoff. Update it before stopping: what is done, what is next, what is
+  blocked. A new session or agent starts by reading it.
+- **`_log.md`** takes every search as it is run: query, tool, hit count, what was kept and why.
+- **`_work/<name>.md`** holds one task's or one subagent's scratch: leads, partial reads, dead ends,
+  and a "Report back" section for the orchestrator. Outputs never cite it. Fold it into source files
+  and the log when the task ends, then delete it.
+- **Subagents** each get a brief, a starting file number, and exclusive ownership of the files they
+  write. Only the orchestrator edits `_index.md`, `claims.md`, `README.md`, and `outputs/`.
+
+## Claims ledger
+
+`claims.md` is a table: ID, claim, value, boundary, source files, status, date checked, note.
+
+- One row per distinct claim. The same number on a different boundary is a different claim.
+- `supported`: found in every listed source on the stated boundary.
+- `contested`: sources on the same boundary disagree. The note says how.
+- `unsupported`: asserted somewhere, found in no retrieved source. Kept so outputs can say so.
+- IDs are permanent. A deleted claim's ID is not reused.
+- `scripts/check.sh` fails on a cited ID missing from the ledger or a ledger row citing a missing file.
 
 ## Source hierarchy
 
@@ -112,17 +161,23 @@ A study reaching a dramatic conclusion gets the same scrutiny as one reaching a 
 
 ## Skills
 
-Each is a markdown file at `skills/<name>/SKILL.md`. Agents without native skill loading read the
-file named here before starting the task.
+Each is a markdown file at `skills/<name>/SKILL.md` with `name` and `description` frontmatter, in
+the Agent Skills format. Agents without native skill loading pick a row below and read that file
+before starting.
 
-| Skill | Use |
-|-------|-----|
-| `new-project` | scaffold `projects/<slug>/` from a question |
-| `background-research` | fast orientation: terms, actors, primary sources, established figures, open disputes |
-| `lit-review` | systematic search, screening, extraction, and synthesis |
-| `perspectives` | map positions on a contested question and the evidence under each |
-| `source-review` | critical review of one paper, report, or disclosure |
-| `verify` | audit a project against its sources and run the mechanical checks |
+| The user asks for | Skill | Output template |
+|-------------------|-------|-----------------|
+| research on a topic with no project yet | `new-project`, then one below | `templates/brief.md` |
+| getting up to speed, "what do we know about X" | `background-research` | `templates/outputs/briefing.md` |
+| a literature, systematic, or evidence review | `lit-review` | `templates/outputs/review.md` |
+| the debate, the positions, stakeholders, both sides | `perspectives` | `templates/outputs/perspectives.md` |
+| a review, critique, or fact-check of one document | `source-review` | `templates/outputs/source-review.md` |
+| a check before sharing, or an update to a project | `verify`, then `METHOD.md` | none; reports in conversation |
+
+Every skill writes source files with `templates/source.md` and claims with `templates/claims.md`.
+Output types with no skill yet (scoping review, rapid review, evidence gap map, policy brief):
+see `projects/research-output-types/outputs/briefing.md` for their definitions, adapt the nearest
+skill, and state the adaptation in the output's Method section.
 
 ## Scripts
 

@@ -1,10 +1,10 @@
 # [Project title]
 
-[One or two lines: what the project covers, how many sources.] [Brief](brief.md) · [Index](_index.md)
+[One or two lines: what the project covers, how many sources.] [Brief](brief.md) · [Index](_index.md) · [Claims](claims.md)
 
 ## Established
 
-| Finding | Value | Boundary | Source |
+| Finding | Value | Boundary | Claim |
 |---------|-------|----------|--------|
 
 ## How to read these

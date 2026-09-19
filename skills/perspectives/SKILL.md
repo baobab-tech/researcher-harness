@@ -1,55 +1,28 @@
 ---
 name: perspectives
-description: Map the positions on a contested question - who holds each view, what evidence and interests stand behind it, and where the disagreement is real versus definitional - producing projects/<slug>/outputs/perspectives.md. Use when the user asks for perspectives, viewpoints, stakeholder positions, both sides, the debate on X, or a steelman.
+description: Map the positions on a contested question - who holds each view, the evidence and interests behind it, and whether each disagreement is empirical, definitional, or about values - producing projects/<slug>/outputs/perspectives.md. Use when the user asks for perspectives, viewpoints, stakeholder positions, both sides, the debate on X, or a steelman.
 ---
 
 # Perspectives
 
-Goal: represent each position as its strongest proponents would, then show what evidence each
-rests on and where positions actually conflict.
+Represent each position as its strongest proponents would, then show what evidence each rests on
+and where positions actually conflict. This is a positions map, not a single-author Perspective
+article.
 
-Requires `projects/<slug>/brief.md`. Run `new-project` first if it does not exist.
+Requires `projects/<slug>/brief.md`; run `new-project` first if missing. Output template:
+`templates/outputs/perspectives.md`.
 
-## Steps
-
-1. **Identify positions from primary statements.** Find each position in its holders' own words:
-   papers, submissions to consultations, testimony, position papers, filings, official statements.
-   Commentary about a position is a lead, not a source. Log searches in `_log.md`.
-
-2. **One source file per statement.** `templates/source.md`, with `Type` set appropriately and
-   `Status: opinion` where the source argues rather than measures. Record the holder's funding,
-   membership, and interest in the outcome.
-
-3. **Trace each position's evidence.** For every factual claim a position rests on, find the
-   underlying source and write it up, or record that none is cited. Verify the claim appears in the
-   source it cites.
-
-4. **Classify each disagreement:**
-   - **Empirical:** the positions predict different facts. Say what evidence would settle it and
-     whether it exists.
-   - **Definitional:** the positions count different things. Show the boundary arithmetic.
-   - **Values:** the positions agree on facts and weigh them differently. Name the values.
-
-5. **Write `outputs/perspectives.md`:**
-
-   ```markdown
-   # [Question]: perspectives
-
-   ## Positions
-   ### [Position, stated as its holders would]
-   **Held by:** [actors, with interests and funding]
-   **Strongest argument:** ...
-   **Evidence cited:** [links to source files, with whether each claim checked out]
-   **Weakest point:** ...
-
-   ## Where they disagree
-   | Point | Position A | Position B | Kind | What would settle it |
-
-   ## Common ground
-   ## Unsupported claims
-   [Claims made by any side that no source supports.]
-   ```
-
-   Same scrutiny for every position, including the one that seems right.
-
-6. **Close:** rebuild `_index.md` and `README.md`, update `_queue.md`, run `scripts/check.sh <slug>`.
+1. **Find positions in their holders' own words:** papers, consultation submissions, testimony,
+   position papers, filings, official statements. Commentary about a position is a lead, not a
+   source. Log searches.
+2. **One source file per statement,** `Status: opinion` where the source argues and does not
+   measure. Record the holder's funding, membership, and stake in the outcome.
+3. **Trace each position's evidence.** For every factual claim a position rests on, fetch the cited
+   source and check the claim is in it. Enter each into `claims.md`: `supported`, `contested`, or
+   `unsupported`.
+4. **Classify each disagreement:** empirical (the positions predict different facts; say what would
+   settle it), definitional (they count different things; show the arithmetic), or values (same
+   facts, different weights; name the values).
+5. **Write** `outputs/perspectives.md` from the template. Apply the same scrutiny to every position,
+   including the one that seems right.
+6. **Close.** Rebuild `_index.md` and `README.md`, update `_queue.md`, run `scripts/check.sh <slug>`.

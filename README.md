@@ -1,104 +1,111 @@
 # Researcher Harness
 
-**Version 0.** A folder of markdown skills, shell scripts, and templates that turns any file-and-shell
-agent into a careful researcher: literature reviews, background briefings, perspective maps, and
-critical reviews of single documents. Claude Code, Claude Cowork, and other agents use the same files.
+Research methods, verification rules, templates, and shell tools that any AI agent can pick up to
+produce literature reviews, background briefings, perspective maps, and document reviews. Every
+number in an output traces through a claims ledger to a source file, and from there to the source's
+full text.
 
-Every claim in an output links to a markdown file recording one source, its numbers, their boundary
-and method, its funding, and what it omits, each checked against the source's full text. The method
-comes from [research-ai-energy](https://github.com/baobab-tech/research-ai-energy), a 126-source
-corpus where verification found the most-quoted figure appeared in no version of its cited paper.
+**Version 0.** Markdown and bash only: no build step, no server, no SDK.
 
-## Setup
+## If you are an agent
+
+1. **Get the files.** Clone into your working directory so you can run the scripts:
+
+   ```bash
+   git clone --depth 1 https://github.com/baobab-tech/researcher-harness && cd researcher-harness
+   ```
+
+   Without a shell, read the files over HTTP from
+   `https://raw.githubusercontent.com/baobab-tech/researcher-harness/main/<path>`, starting with
+   [llms.txt](llms.txt), and follow the method without the scripts.
+
+2. **Read [AGENTS.md](AGENTS.md).** It holds the rules: source hierarchy, hard rules, evidence
+   layers, working files, the claims ledger, writing style.
+
+3. **Pick the skill for the task** and read its `SKILL.md`:
+
+   | The user asks for | Skill | Output template |
+   |-------------------|-------|-----------------|
+   | research on a topic with no project yet | [new-project](skills/new-project/SKILL.md), then one below | [brief](templates/brief.md) |
+   | getting up to speed, "what do we know about X" | [background-research](skills/background-research/SKILL.md) | [briefing](templates/outputs/briefing.md) |
+   | a literature, systematic, or scoping review | [lit-review](skills/lit-review/SKILL.md) | [review](templates/outputs/review.md) |
+   | the debate, the positions, both sides | [perspectives](skills/perspectives/SKILL.md) | [perspectives](templates/outputs/perspectives.md) |
+   | a critique or fact-check of one document | [source-review](skills/source-review/SKILL.md) | [source-review](templates/outputs/source-review.md) |
+   | a check before sharing, or an update | [verify](skills/verify/SKILL.md) and [METHOD.md](METHOD.md) | none |
+
+4. **Check your tools.** `bash`, `curl`, `jq`, `pdftotext`. API keys come from environment
+   variables or a `.env` file at the repo root. Each script names a missing key and exits 3; work
+   on with the keyless backends.
+
+5. **Copy templates; do not write project files from memory.** `scripts/check.sh <slug>` before
+   you report back.
+
+## How the evidence flows
+
+```
+fetch            extract             assert               write
+  │                 │                   │                    │
+.cache/NNN.txt → sources/NNN-*.md → claims.md [C001] → outputs/*.md
+ raw full text    one per source     one row per claim   prose citing claim IDs
+ (gitignored)     boundary, funding  status: supported,  every number carries
+                  limits, URL        contested,          an ID
+                                     unsupported
+```
+
+Alongside: `brief.md` (question and scope), `_log.md` (every search, including empty ones),
+`_queue.md` (state and next steps, the handoff between sessions), `_work/` (per-task scratch
+notes). Details in [AGENTS.md](AGENTS.md).
+
+A worked example: [projects/research-output-types](projects/research-output-types/), a 9-source
+briefing on the kinds of task and output researchers produce, with its
+[claims ledger](projects/research-output-types/claims.md).
+
+## Tools
+
+| Script | Does | Keys |
+|--------|------|------|
+| `scripts/search.sh openalex\|arxiv "<q>" [n]` | academic search | none |
+| `scripts/search.sh scholar\|web\|news "<q>" [n]` | Google search via Serper | `SERPER_API_KEY` |
+| `scripts/doi.sh <doi>` | confirm the record on Crossref, find open copies | `CONTACT_EMAIL` for Unpaywall |
+| `scripts/fetch.sh <url> [out]` | URL or PDF to text; exits 4 on a bot check | `JINA_API_KEY` optional |
+| `scripts/check.sh <slug> [--urls]` | links, index, numbering, fields, claim IDs, URLs | none |
+
+[tools/](tools/) documents each API directly, plus retrieval routes around publisher blocks and the
+[verification failure modes](tools/verification.md) the rules exist to prevent.
+
+## For people
 
 ```bash
 git clone https://github.com/baobab-tech/researcher-harness && cd researcher-harness
-cp .env.example .env          # add the keys you have; see below
-brew install jq poppler       # jq and pdftotext; curl ships with macOS
+cp .env.example .env        # SERPER_API_KEY, JINA_API_KEY, EXA_API_KEY, CONTACT_EMAIL
+brew install jq poppler     # or apt-get install jq poppler-utils
 ```
 
-Point an agent at the folder. Claude Code reads `CLAUDE.md` and `.claude/skills/` automatically;
-other agents start from [AGENTS.md](AGENTS.md).
+Open the folder in Claude Code, Claude Cowork, Codex, or any agent that reads `AGENTS.md`, and ask
+in plain language: "Lit review: does a four-day week reduce burnout? Peer-reviewed, 2019 onward."
 
-### API keys
+## Conventions
 
-| Key | Used by | Without it |
-|-----|---------|------------|
-| `CONTACT_EMAIL` | Unpaywall, OpenAlex polite pool | Unpaywall lookups are skipped |
-| `SERPER_API_KEY` | `search.sh scholar\|web\|news` | only OpenAlex and arXiv search |
-| `JINA_API_KEY` | `fetch.sh` for HTML pages | works keyless at a lower rate limit |
-| `EXA_API_KEY` | content extraction per `tools/exa.md` | optional |
+The repo follows the common agent-harness conventions, so most agents find their way in without
+configuration:
 
-OpenAlex, arXiv, Crossref, Semantic Scholar, and the Wayback Machine need no key. Scripts exit with
-code 3 and name the key when one is required and missing.
-
-## Use
-
-Ask in plain language:
-
-- "Background research on municipal heat-pump subsidies in Canada"
-- "Lit review: does a four-day week reduce burnout? Peer-reviewed, 2019 onward"
-- "Map the perspectives on small modular reactors for data centres"
-- "Review this paper: https://arxiv.org/abs/..."
-- "Verify the heat-pumps project before I share it"
-
-The agent creates `projects/<slug>/`, drafts a brief, asks about scope once, then runs the process.
-[projects/research-output-types](projects/research-output-types/) is a worked example: a briefing on
-the kinds of task and output researchers produce.
-
-## Contents
-
-| Path | Holds |
-|------|-------|
-| [AGENTS.md](AGENTS.md) | rules every agent follows: source hierarchy, hard rules, style. `CLAUDE.md` links here |
-| [METHOD.md](METHOD.md) | how to run a pass: audit, search, verify, prune, rebuild |
-| [skills/](skills/) | one `SKILL.md` per process; `.claude/skills` links here |
-| [scripts/](scripts/) | `search.sh`, `doi.sh`, `fetch.sh`, `check.sh` |
-| [tools/](tools/) | API references and retrieval routes, verification failure modes |
-| [templates/](templates/) | brief, source file, index, log, queue, project README |
-| `projects/<slug>/` | one research project |
-
-### Skills
-
-| Skill | Produces |
-|-------|----------|
-| `new-project` | `projects/<slug>/` with a drafted `brief.md` |
-| `background-research` | `outputs/briefing.md`: terms, actors, primary sources, established figures, disputes, gaps |
-| `lit-review` | `outputs/review.md`: protocol, screening counts, evidence by sub-question, quality, gaps |
-| `perspectives` | `outputs/perspectives.md`: positions, their evidence and interests, and whether each disagreement is empirical, definitional, or about values |
-| `source-review` | a claim-by-claim review of one document |
-| `verify` | an audit: mechanical checks, re-pulled sources, pruned files, rebuilt summaries |
-
-### Scripts
-
-```bash
-scripts/search.sh openalex "scoping review methodology" 10
-scripts/doi.sh 10.1186/s12874-018-0611-x
-scripts/fetch.sh https://arxiv.org/pdf/2304.03271 paper.txt
-scripts/check.sh <slug> --urls
-```
-
-### A project
-
-```
-projects/<slug>/
-  brief.md      question, scope, criteria, the distinctions that matter in this field
-  README.md     what the evidence establishes, rebuilt from sources/
-  _index.md     one row per source file
-  _log.md       every search, including empty ones
-  _queue.md     state and next steps
-  sources/      NNN-author-year-topic.md
-  outputs/      briefing, review, perspectives
-```
+| Convention | Here |
+|------------|------|
+| `AGENTS.md` project instructions | [AGENTS.md](AGENTS.md); `CLAUDE.md` is a symlink to it |
+| Agent Skills (`SKILL.md` with `name`/`description` frontmatter) | [skills/](skills/); `.claude/skills` is a symlink |
+| `llms.txt` index for agents reading over HTTP | [llms.txt](llms.txt) |
+| Tools as CLI scripts with plain-text output and exit codes | [scripts/](scripts/) |
+| State in files, not in context | `_queue.md`, `_log.md`, `_work/`, `claims.md` |
+| Subagents with exclusive file ownership | [METHOD.md](METHOD.md) |
 
 ## Open directions
 
 Nothing below is decided.
 
-- **More skills** for the output types in the
+- **Skills** for the output types in the
   [research-output-types briefing](projects/research-output-types/outputs/briefing.md): scoping
-  review, rapid review, umbrella review, evidence gap map, policy brief, perspective piece.
-- **MCP servers** wrapping the scripts, so agents without a shell can search, fetch, and verify.
-- **A data layer**: a shared store of verified source records across projects, so a paper checked
+  review, rapid review, umbrella review, evidence gap map, policy brief.
+- **MCP servers** wrapping the scripts, for agents without a shell.
+- **A shared data layer** of verified source records and claims across projects, so a paper checked
   once is not re-checked from scratch.
-- **A product**: hosted runs, shared projects, a reader for outputs.
+- **A product** built on the same method.

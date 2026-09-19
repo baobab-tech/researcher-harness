@@ -51,7 +51,22 @@ grep -h '^\*\*URL:\*\*' "${files[@]}" /dev/null 2>/dev/null | sed 's/^\*\*URL:\*
 grep -lniE 'supersede|correction needed|previously stated|corrected excerpt' \
   "${files[@]}" "$p/README.md" "$p"/outputs/*.md 2>/dev/null | sed 's/^/CHANGELOG TEXT in /' | grep . && fail=1
 
-# 9. URLs resolve (slow; opt in). 403 = bot-blocked, not dead.
+# 9. Claims ledger: unique IDs, source files exist, every cited ID is defined
+if [ -f "$p/claims.md" ]; then
+  ids=$(grep -oE "^\| C[0-9]{3} " "$p/claims.md" | tr -d "| ")
+  dup=$(echo "$ids" | sort | uniq -d); [ -n "$dup" ] && flag "DUPLICATE CLAIM ID: $dup"
+  grep -oE "sources/[0-9]{3}-[^)| ]+\.md" "$p/claims.md" | sort -u | while read -r s; do
+    [ -f "$p/$s" ] || echo "CLAIM CITES MISSING FILE: $s"
+  done | grep . && fail=1
+  grep -ohE "\[C[0-9]{3}\]" "$p/README.md" "$p"/outputs/*.md 2>/dev/null | tr -d "[]" | sort -u | while read -r c; do
+    echo "$ids" | grep -qx "$c" || echo "UNDEFINED CLAIM $c cited in outputs"
+  done | grep . && fail=1
+  echo "claims: $(echo "$ids" | grep -c .) defined, $(grep -ohE "\[C[0-9]{3}\]" "$p/README.md" "$p"/outputs/*.md 2>/dev/null | sort -u | wc -l | tr -d " ") cited"
+else
+  echo "no claims.md"
+fi
+
+# 10. URLs resolve (slow; opt in). 403 = bot-blocked, not dead.
 if [ "${2:-}" = "--urls" ]; then
   grep -h '^\*\*URL:\*\*' "${files[@]}" /dev/null | sed 's/^\*\*URL:\*\* *//' | sort -u | while read -r u; do
     c=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 20 "$u")
