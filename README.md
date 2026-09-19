@@ -1,16 +1,22 @@
 # Researcher Harness
 
-Research methods, verification rules, templates, and shell tools that any AI agent can pick up to
-produce literature reviews, background briefings, perspective maps, and document reviews. Every
-number in an output traces through a claims ledger to a source file, and from there to the source's
-full text.
+Point an AI agent at this repo and it researches the way a careful researcher would.
 
-The human stays in charge. Agents stop at named checkpoints to clarify intent, agree the design,
-review early findings, spot-check claims against sources, and review drafts. The agent does the
-searching, reading, and bookkeeping; the human decides what the question is and what the evidence
-means.
+- **Lightweight.** Markdown and bash. No build step, no server, no SDK, nothing to install.
+- **Agent-driven.** The agent clones it, reads the rules, picks a skill, and runs the scripts.
+- **Any agent with a shell.** Claude Code, Claude and ChatGPT desktop, other coding agents.
+- **Twelve skills:** literature, scoping and rapid reviews, evidence gap maps, background
+  briefings, positions maps, policy briefs, single-document reviews, audits.
+- **Human in the loop.** The agent stops at named checkpoints: what the research is for, how to
+  design it, what it is finding, claims to spot-check, the draft.
+- **Traceable.** Every number in an output cites a claim; every claim carries its scope, period,
+  attribution, status and a quote; every quote comes from a source read in full.
+- **Checked by script.** `check.sh` fails on a broken citation, a missing field, or a claim a
+  person marked wrong.
+- **Free to run.** Academic search and page fetching need no API key; web search uses whichever
+  key you have.
 
-**Version 0.** Markdown and bash only: no build step, no server, no SDK.
+**Version 0.** Expect rough edges; the method is the stable part.
 
 ## Quick start
 
