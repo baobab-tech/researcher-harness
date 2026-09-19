@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 664" role="img" aria-labelledby="wf-title wf-desc">
+  <title id="wf-title">Human-in-the-loop research workflow</title>
+  <desc id="wf-desc">Two swimlanes, Human and Agent, read top to bottom. The human answers the intent checkpoint; the agent scaffolds the project; the human answers the design checkpoint; the agent searches and reads and extracts sources; the human reviews early findings after the first 3 to 5 sources; the agent records claims; the human runs the sanity check; the agent writes the output; the human reviews the draft and agrees the handoff. Every checkpoint answer is logged to brief.md.</desc>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; }
+    .b { font-weight: 600; }
+    .t14 { font-size: 14px; }
+    .hb { fill: #fff4e5; stroke: #d97706; stroke-width: 1.5; }
+    .ab { fill: #eef4ff; stroke: #1f6feb; stroke-width: 1.5; }
+    .fb { fill: #f6f8fa; stroke: #8c959f; stroke-width: 1.5; }
+    .hband { fill: #d97706; fill-opacity: .06; }
+    .aband { fill: #1f6feb; fill-opacity: .05; }
+    .ht { fill: #92400e; }
+    .at { fill: #0550ae; }
+    .t1 { fill: #1f2328; }
+    .t2 { fill: #424a53; }
+    .mu { fill: #6e7781; }
+    .ln { fill: none; stroke: #848d97; stroke-width: 1.5; }
+    .dash { stroke-dasharray: 4 4; }
+    .ah { fill: #848d97; }
+    @media (prefers-color-scheme: dark) {
+      .hb { fill: #2b1d0c; stroke: #d18616; }
+      .ab { fill: #0c2240; stroke: #4493f8; }
+      .fb { fill: #161b22; stroke: #6e7681; }
+      .hband { fill: #d18616; fill-opacity: .06; }
+      .aband { fill: #4493f8; fill-opacity: .07; }
+      .ht { fill: #f2b35c; }
+      .at { fill: #79b8ff; }
+      .t1 { fill: #e6edf3; }
+      .t2 { fill: #b1bac4; }
+      .mu { fill: #848d97; }
+      .ln { stroke: #7d8590; }
+      .ah { fill: #7d8590; }
+    }
+  </style>
+  <defs>
+    <marker id="wf-arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+      <path class="ah" d="M0,1 L10,5 L0,9 Z"/>
+    </marker>
+  </defs>
+
+  <!-- Lanes -->
+  <rect class="hband" x="166" y="12" width="300" height="638" rx="12"/>
+  <rect class="aband" x="508" y="12" width="316" height="638" rx="12"/>
+
+  <!-- Lane headers -->
+  <rect class="hb" x="182" y="26" width="72" height="26" rx="13"/>
+  <text class="ht b t14" x="218" y="44" text-anchor="middle">Human</text>
+  <text class="mu" x="266" y="44">decides at each checkpoint</text>
+
+  <rect class="ab" x="524" y="26" width="68" height="26" rx="13"/>
+  <text class="at b t14" x="558" y="44" text-anchor="middle">Agent</text>
+  <text class="mu" x="604" y="44">does the work, stops to ask</text>
+
+  <!-- brief.md: every checkpoint answer is logged -->
+  <rect class="fb" x="16" y="16" width="110" height="46" rx="8"/>
+  <text class="t1 b t14 mono" x="71" y="36" text-anchor="middle">brief.md</text>
+  <text class="t2" x="71" y="53" text-anchor="middle">decisions</text>
+  <path class="ln dash" d="M71,613 V62" marker-end="url(#wf-arrow)"/>
+  <path class="ln dash" d="M182,97 H71"/>
+  <path class="ln dash" d="M182,193 H71"/>
+  <path class="ln dash" d="M182,355 H71"/>
+  <path class="ln dash" d="M182,451 H71"/>
+  <path class="ln dash" d="M182,547 H71"/>
+  <path class="ln dash" d="M182,613 H71"/>
+  <circle class="ah" cx="71" cy="97" r="3"/>
+  <circle class="ah" cx="71" cy="193" r="3"/>
+  <circle class="ah" cx="71" cy="355" r="3"/>
+  <circle class="ah" cx="71" cy="451" r="3"/>
+  <circle class="ah" cx="71" cy="547" r="3"/>
+  <circle class="ah" cx="71" cy="613" r="3"/>
+  <text class="mu" x="126" y="90" text-anchor="middle">logged</text>
+
+  <!-- Flow connectors -->
+  <path class="ln" d="M450,97 H558 Q566,97 566,105 V124" marker-end="url(#wf-arrow)"/>
+  <path class="ln" d="M524,145 H418 Q410,145 410,153 V172" marker-end="url(#wf-arrow)"/>
+  <path class="ln" d="M450,193 H558 Q566,193 566,201 V220" marker-end="url(#wf-arrow)"/>
+  <path class="ln" d="M666,262 V286" marker-end="url(#wf-arrow)"/>
+  <path class="ln" d="M524,307 H418 Q410,307 410,315 V334" marker-end="url(#wf-arrow)"/>
+  <path class="ln" d="M450,355 H558 Q566,355 566,363 V382" marker-end="url(#wf-arrow)"/>
+  <path class="ln" d="M524,403 H418 Q410,403 410,411 V430" marker-end="url(#wf-arrow)"/>
+  <path class="ln" d="M450,451 H558 Q566,451 566,459 V478" marker-end="url(#wf-arrow)"/>
+  <path class="ln" d="M524,499 H418 Q410,499 410,507 V526" marker-end="url(#wf-arrow)"/>
+  <path class="ln" d="M316,568 V592" marker-end="url(#wf-arrow)"/>
+  <text class="mu" x="487" y="90" text-anchor="middle">answer</text>
+  <text class="mu" x="487" y="138" text-anchor="middle">asks</text>
+
+  <!-- 1. intent -->
+  <rect class="hb" x="182" y="76" width="268" height="42" rx="8"/>
+  <text class="ht b t14" x="196" y="94">intent</text>
+  <text class="t2" x="196" y="110">purpose, audience, priors</text>
+
+  <!-- 2. scaffold project -->
+  <rect class="ab" x="524" y="124" width="284" height="42" rx="8"/>
+  <text class="at b t14" x="538" y="142">scaffold project</text>
+  <text class="t2" x="538" y="158"><tspan class="mono">projects/&lt;slug&gt;/</tspan> from templates</text>
+
+  <!-- 3. design -->
+  <rect class="hb" x="182" y="172" width="268" height="42" rx="8"/>
+  <text class="ht b t14" x="196" y="190">design</text>
+  <text class="t2" x="196" y="206">question, method, scope</text>
+
+  <!-- 4. search -->
+  <rect class="ab" x="524" y="220" width="284" height="42" rx="8"/>
+  <text class="at b t14" x="538" y="238">search</text>
+  <text class="t2" x="538" y="254">every query logged in <tspan class="mono">_log.md</tspan></text>
+
+  <!-- 5. read & extract sources -->
+  <rect class="ab" x="524" y="286" width="284" height="42" rx="8"/>
+  <text class="at b t14" x="538" y="304">read &amp; extract sources</text>
+  <text class="t2" x="538" y="320">full text → <tspan class="mono">sources/NNN-*.md</tspan></text>
+
+  <!-- 6. early findings -->
+  <rect class="hb" x="182" y="334" width="268" height="42" rx="8"/>
+  <text class="ht b t14" x="196" y="352">early findings</text>
+  <text class="t2" x="196" y="368">after the first 3–5 sources</text>
+
+  <!-- 7. record claims -->
+  <rect class="ab" x="524" y="382" width="284" height="42" rx="8"/>
+  <text class="at b t14" x="538" y="400">record claims</text>
+  <text class="t2" x="538" y="416"><tspan class="mono">claims.md</tspan>, one entry per claim</text>
+
+  <!-- 8. sanity check -->
+  <rect class="hb" x="182" y="430" width="268" height="42" rx="8"/>
+  <text class="ht b t14" x="196" y="448">sanity check</text>
+  <text class="t2" x="196" y="464">spot-check claims against sources</text>
+
+  <!-- 9. write output -->
+  <rect class="ab" x="524" y="478" width="284" height="42" rx="8"/>
+  <text class="at b t14" x="538" y="496">write output</text>
+  <text class="t2" x="538" y="512"><tspan class="mono">outputs/*.md</tspan> citing <tspan class="mono">[C001]</tspan></text>
+
+  <!-- 10. draft -->
+  <rect class="hb" x="182" y="526" width="268" height="42" rx="8"/>
+  <text class="ht b t14" x="196" y="544">draft</text>
+  <text class="t2" x="196" y="560">framing, strength of claims</text>
+
+  <!-- 11. handoff -->
+  <rect class="hb" x="182" y="592" width="268" height="42" rx="8"/>
+  <text class="ht b t14" x="196" y="610">handoff</text>
+  <text class="t2" x="196" y="626">next steps</text>
+</svg>

@@ -14,6 +14,8 @@ means.
 
 ## If you are an agent
 
+![Agent entry path: README.md, then AGENTS.md for the rules, then a skill picked by request type, then templates/ copied, then scripts/ run with keys.sh first. Keyless providers (OpenAlex, arXiv, Crossref, Europe PMC, CORE, Jina) are always available; keyed web search (Tavily, Serper, SerpApi, Brave, Exa, Jina) is used if keys are present.](docs/diagrams/agent-entry.svg)
+
 1. **Get the files.** Clone into your working directory so you can run the scripts:
 
    ```bash
@@ -59,6 +61,8 @@ means.
 
 ## Human in the loop
 
+![Workflow in two lanes, read top to bottom. Human checkpoints: intent, design, early findings after the first 3–5 sources, sanity check, draft, handoff. Agent steps between them: scaffold project, search, read and extract sources, record claims, write output. Every checkpoint answer is logged to brief.md.](docs/diagrams/workflow.svg)
+
 | Checkpoint | The agent brings | The human decides |
 |------------|------------------|-------------------|
 | resume | every project's state and pending items | which project, what to clear first |
@@ -76,15 +80,7 @@ An unattended run records its defaults as `assumed` and says so in the output.
 
 ## How the evidence flows
 
-```
-fetch            extract             assert               write
-  │                 │                   │                    │
-.cache/NNN.txt → sources/NNN-*.md → claims.md [C001] → outputs/*.md
- raw full text    one per source     one block per claim prose citing claim IDs
- (gitignored)     boundary, funding  status: supported,  every number carries
-                  limits, URL        contested,          an ID
-                                     unsupported
-```
+![Evidence layers, left to right: 0 Raw (.cache/NNN.txt, full text, gitignored), 1 Source (sources/NNN-*.md, one file per source), 2 Claim (claims.md, C001 onward), 3 Output (outputs/*.md citing [C001]). scripts/check.sh validates the links from outputs to claims and from claims to source files. The human sanity check marks claims confirmed, wrong, or unsure.](docs/diagrams/evidence-layers.svg)
 
 Alongside: `brief.md` (question and scope), `_log.md` (every search, including empty ones),
 `_queue.md` (state and next steps, the handoff between sessions), `_work/` (per-task scratch

@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 518" role="img" aria-labelledby="ae-title ae-desc">
+  <title id="ae-title">How an agent finds its way in</title>
+  <desc id="ae-desc">An agent reads README.md, then AGENTS.md for the rules, picks a skill by request type, copies templates, and runs scripts. Skills: resume and new-project to start; lit-review, scoping-review, rapid-review, and evidence-gap-map to review; background-research, positions-map, and policy-brief to brief and map; source-review, sanity-check, and verify to check. Scripts: keys.sh first, then search.sh, fetch.sh, doi.sh, and check.sh. Providers: keyed web search (Tavily, Serper, SerpApi, Brave, Exa, Jina) is used if keys are present; keyless providers (OpenAlex, arXiv, Crossref, Europe PMC, CORE, Jina) are always available.</desc>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; }
+    .b { font-weight: 600; }
+    .t14 { font-size: 14px; }
+    .ab { fill: #eef4ff; stroke: #1f6feb; stroke-width: 1.5; }
+    .fb { fill: #f6f8fa; stroke: #8c959f; stroke-width: 1.5; }
+    .chip { fill: #ffffff; stroke: #c4ccd5; stroke-width: 1; }
+    .dash { stroke-dasharray: 5 4; stroke: #8c959f; }
+    .at { fill: #0550ae; }
+    .t1 { fill: #1f2328; }
+    .t2 { fill: #424a53; }
+    .mu { fill: #6e7781; }
+    .ln { fill: none; stroke: #848d97; stroke-width: 1.5; }
+    .ah { fill: #848d97; }
+    @media (prefers-color-scheme: dark) {
+      .ab { fill: #0c2240; stroke: #4493f8; }
+      .fb { fill: #161b22; stroke: #6e7681; }
+      .chip { fill: #0d1117; stroke: #3d444d; }
+      .dash { stroke: #6e7681; }
+      .at { fill: #79b8ff; }
+      .t1 { fill: #e6edf3; }
+      .t2 { fill: #b1bac4; }
+      .mu { fill: #848d97; }
+      .ln { stroke: #7d8590; }
+      .ah { fill: #7d8590; }
+    }
+  </style>
+  <defs>
+    <marker id="ae-arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+      <path class="ah" d="M0,1 L10,5 L0,9 Z"/>
+    </marker>
+  </defs>
+
+  <!-- Entry path -->
+  <rect class="fb" x="16" y="16" width="190" height="48" rx="8"/>
+  <text class="t1 b t14 mono" x="30" y="36">README.md</text>
+  <text class="t2" x="30" y="54">start here</text>
+
+  <rect class="fb" x="16" y="92" width="190" height="48" rx="8"/>
+  <text class="t1 b t14 mono" x="30" y="112">AGENTS.md</text>
+  <text class="t2" x="30" y="130">the rules</text>
+
+  <rect class="ab" x="16" y="168" width="190" height="48" rx="8"/>
+  <text class="at b t14" x="30" y="188">pick a skill</text>
+  <text class="t2" x="30" y="206">by request type</text>
+
+  <rect class="ab" x="16" y="244" width="190" height="48" rx="8"/>
+  <text class="at b t14" x="30" y="264">copy <tspan class="mono">templates/</tspan></text>
+  <text class="t2" x="30" y="282">never write from memory</text>
+
+  <rect class="ab" x="16" y="320" width="190" height="48" rx="8"/>
+  <text class="at b t14" x="30" y="340">run <tspan class="mono">scripts/</tspan></text>
+  <text class="t2" x="30" y="358"><tspan class="mono">keys.sh</tspan> first</text>
+
+  <path class="ln" d="M111,64 V92" marker-end="url(#ae-arrow)"/>
+  <path class="ln" d="M111,140 V168" marker-end="url(#ae-arrow)"/>
+  <path class="ln" d="M111,216 V244" marker-end="url(#ae-arrow)"/>
+  <path class="ln" d="M111,292 V320" marker-end="url(#ae-arrow)"/>
+
+  <!-- Skills, grouped by request type -->
+  <path class="ln" d="M206,192 H250" marker-end="url(#ae-arrow)"/>
+  <rect class="fb" x="250" y="112" width="574" height="188" rx="10"/>
+  <text class="t2 mono" x="266" y="136">skills/&lt;name&gt;/SKILL.md</text>
+
+  <text class="mu" x="268" y="162">start</text>
+  <rect class="chip" x="266" y="172" width="92" height="24" rx="12"/>
+  <text class="t1" x="312" y="188.5" text-anchor="middle">resume</text>
+  <rect class="chip" x="266" y="202" width="92" height="24" rx="12"/>
+  <text class="t1" x="312" y="218.5" text-anchor="middle">new-project</text>
+
+  <text class="mu" x="375" y="162">review</text>
+  <rect class="chip" x="373" y="172" width="136" height="24" rx="12"/>
+  <text class="t1" x="441" y="188.5" text-anchor="middle">lit-review</text>
+  <rect class="chip" x="373" y="202" width="136" height="24" rx="12"/>
+  <text class="t1" x="441" y="218.5" text-anchor="middle">scoping-review</text>
+  <rect class="chip" x="373" y="232" width="136" height="24" rx="12"/>
+  <text class="t1" x="441" y="248.5" text-anchor="middle">rapid-review</text>
+  <rect class="chip" x="373" y="262" width="136" height="24" rx="12"/>
+  <text class="t1" x="441" y="278.5" text-anchor="middle">evidence-gap-map</text>
+
+  <text class="mu" x="526" y="162">brief &amp; map</text>
+  <rect class="chip" x="524" y="172" width="160" height="24" rx="12"/>
+  <text class="t1" x="604" y="188.5" text-anchor="middle">background-research</text>
+  <rect class="chip" x="524" y="202" width="160" height="24" rx="12"/>
+  <text class="t1" x="604" y="218.5" text-anchor="middle">positions-map</text>
+  <rect class="chip" x="524" y="232" width="160" height="24" rx="12"/>
+  <text class="t1" x="604" y="248.5" text-anchor="middle">policy-brief</text>
+
+  <text class="mu" x="701" y="162">check</text>
+  <rect class="chip" x="699" y="172" width="108" height="24" rx="12"/>
+  <text class="t1" x="753" y="188.5" text-anchor="middle">source-review</text>
+  <rect class="chip" x="699" y="202" width="108" height="24" rx="12"/>
+  <text class="t1" x="753" y="218.5" text-anchor="middle">sanity-check</text>
+  <rect class="chip" x="699" y="232" width="108" height="24" rx="12"/>
+  <text class="t1" x="753" y="248.5" text-anchor="middle">verify</text>
+
+  <!-- Scripts and providers -->
+  <path class="ln" d="M206,344 H250" marker-end="url(#ae-arrow)"/>
+  <rect class="fb" x="250" y="316" width="574" height="186" rx="10"/>
+  <text class="t2 mono" x="266" y="340">scripts/</text>
+
+  <rect class="ab" x="266" y="352" width="80" height="26" rx="6"/>
+  <text class="at b mono" x="306" y="369.5" text-anchor="middle">keys.sh</text>
+  <path class="ln" d="M346,365 H376" marker-end="url(#ae-arrow)"/>
+  <rect class="chip" x="376" y="352" width="88" height="26" rx="6"/>
+  <text class="t1 mono" x="420" y="369.5" text-anchor="middle">search.sh</text>
+  <rect class="chip" x="474" y="352" width="80" height="26" rx="6"/>
+  <text class="t1 mono" x="514" y="369.5" text-anchor="middle">fetch.sh</text>
+  <rect class="chip" x="564" y="352" width="66" height="26" rx="6"/>
+  <text class="t1 mono" x="597" y="369.5" text-anchor="middle">doi.sh</text>
+  <rect class="chip" x="640" y="352" width="80" height="26" rx="6"/>
+  <text class="t1 mono" x="680" y="369.5" text-anchor="middle">check.sh</text>
+
+  <rect class="chip dash" x="266" y="392" width="542" height="44" rx="8"/>
+  <text class="t1 b" x="280" y="410">Keyed web search <tspan class="mu" font-weight="400">· used if keys present</tspan></text>
+  <text class="t2" x="280" y="428">Tavily · Serper · SerpApi · Brave · Exa · Jina</text>
+
+  <rect class="chip" x="266" y="444" width="542" height="44" rx="8"/>
+  <text class="t1 b" x="280" y="462">Keyless <tspan class="mu" font-weight="400">· always available</tspan></text>
+  <text class="t2" x="280" y="480">OpenAlex · arXiv · Crossref · Europe PMC · CORE · Jina</text>
+</svg>
