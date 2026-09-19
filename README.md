@@ -36,13 +36,13 @@ It needs a local shell: the agent has to clone the repo and run `curl`, `jq`, an
 
 | App | Works | Notes |
 |-----|-------|-------|
-| Claude Code | yes | this repo was built in it |
-| Claude desktop app | yes | tested |
-| ChatGPT desktop app | yes | tested |
-| ChatGPT on the web | no | tested; browser, no shell |
-| Gemini desktop app (macOS) | no | tested; no local execution environment |
-| Copilot desktop app (macOS) | no | tested; no local execution environment |
-| Other coding agents with shell access (Codex, Cursor, Copilot agent mode in an editor, Gemini CLI) | untested | should work |
+| Claude Code | ✅ | this repo was built in it |
+| Claude desktop app | ✅ | tested |
+| ChatGPT desktop app | ✅ | tested |
+| ChatGPT on the web | ❌ | tested; browser, no shell |
+| Gemini desktop app (macOS) | ❌ | tested; no local execution environment |
+| Copilot desktop app (macOS) | ❌ | tested; no local execution environment |
+| Other coding agents with shell access (Codex, Cursor, Copilot agent mode in an editor, Gemini CLI) | ❔ | should work |
 
 An agent without a shell can still read the method over HTTP, starting at [llms.txt](llms.txt),
 and follow it by hand without the scripts.
