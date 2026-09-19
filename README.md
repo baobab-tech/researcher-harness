@@ -47,7 +47,7 @@ It needs a local shell: the agent has to clone the repo and run `curl`, `jq`, an
 An agent without a shell can still read the method over HTTP, starting at [llms.txt](llms.txt),
 and follow it by hand without the scripts.
 
-## If you are an agent
+## 🤖 If you are an agent
 
 ![Agent entry path: README.md, then AGENTS.md for the rules, then a skill picked by request type, then templates/ copied, then scripts/ run with keys.sh first. Keyless providers (OpenAlex, arXiv, Crossref, Europe PMC, CORE, Jina) are always available; keyed web search (Tavily, Serper, SerpApi, Brave, Exa, Jina) is used if keys are present.](docs/diagrams/agent-entry.svg)
 
@@ -142,7 +142,7 @@ Free tiers, coverage, and fallbacks for each provider: [tools/search-providers.m
 [tools/](tools/) documents each API directly, plus retrieval routes around publisher blocks and the
 [verification failure modes](tools/verification.md) the rules exist to prevent.
 
-## For people
+## 🧑 For people
 
 ```bash
 git clone https://github.com/baobab-tech/researcher-harness && cd researcher-harness
