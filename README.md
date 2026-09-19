@@ -12,6 +12,42 @@ means.
 
 **Version 0.** Markdown and bash only: no build step, no server, no SDK.
 
+## Quick start
+
+You do not need to clone this yourself. In an agent that can run commands on your machine, paste:
+
+```
+Use the research harness at https://github.com/baobab-tech/researcher-harness
+for this: <your research question>. Clone it into .researcher-harness, read its
+AGENTS.md, and follow it.
+```
+
+The agent clones the harness beside your work, asks what the research is for, and puts the project
+in `research/<slug>/` in your workspace unless you say otherwise. To add it to a project you are
+already working in, say so and drop the question:
+
+```
+Add the research harness at https://github.com/baobab-tech/researcher-harness to this
+project so we can use its research skills. Clone it into .researcher-harness and read
+its AGENTS.md.
+```
+
+### Where this works
+
+It needs a local shell: the agent has to clone the repo and run `curl`, `jq`, and `pdftotext`.
+
+| Works | Tested |
+|-------|--------|
+| Claude Code | yes, this repo was built in it |
+| Claude desktop app | yes |
+| ChatGPT desktop app | yes |
+| Other coding agents with shell access (Codex, Cursor, Copilot agent mode in an editor, Gemini CLI) | untested; should work |
+
+Web chat apps cannot: no local execution environment to clone into or run scripts in. That rules
+out chat in the browser, and the Gemini and Copilot chat apps. An agent without a shell can still
+read the method over HTTP, starting at [llms.txt](llms.txt), and follow it by hand without the
+scripts.
+
 ## If you are an agent
 
 ![Agent entry path: README.md, then AGENTS.md for the rules, then a skill picked by request type, then templates/ copied, then scripts/ run with keys.sh first. Keyless providers (OpenAlex, arXiv, Crossref, Europe PMC, CORE, Jina) are always available; keyed web search (Tavily, Serper, SerpApi, Brave, Exa, Jina) is used if keys are present.](docs/diagrams/agent-entry.svg)

@@ -8,7 +8,7 @@ description: Start a research project under projects/<slug>/ by interviewing the
 1. **Check for an existing project.** Look in `projects/` for one on the same topic; if found, read
    its `brief.md` and `_queue.md` and ask whether to extend it.
 
-   Run `scripts/keys.sh`. If no web search provider is keyed, include that in the intent checkpoint:
+   Run `scripts/keys.sh` (or `.researcher-harness/scripts/keys.sh`). If no web search provider is keyed, include that in the intent checkpoint:
    what it limits and which free key fills it (`tools/search-providers.md`).
 
 2. **CHECKPOINT: intent.** Before scaffolding, ask the human, one question per item with the
@@ -23,15 +23,23 @@ description: Start a research project under projects/<slug>/ by interviewing the
    Offer your reading of the request as a default for each. If answers raise new questions, ask
    one follow-up round; stop there.
 
-3. **Scaffold.**
+3. **Scaffold.** `H` is the harness root (this repo, or `.researcher-harness/` when working from
+   another workspace); `p` is where the human asked the project to live (default
+   `$H/projects/<slug>`, or `research/<slug>/` in their own workspace).
 
    ```bash
-   p=projects/<slug>
-   mkdir -p "$p/sources" "$p/outputs" "$p/_work" "$p/inputs" "$p/.cache"
-   for t in brief claims; do cp "templates/$t.md" "$p/$t.md"; done
-   cp templates/queue.md "$p/_queue.md"; cp templates/log.md "$p/_log.md"
-   cp templates/index.md "$p/_index.md"; cp templates/project-readme.md "$p/README.md"
+   H=.; p=projects/<slug>            # or: H=.researcher-harness; p=research/<slug>
+   mkdir -p "$p"/{sources,outputs,_work,inputs,.cache}
+   cp "$H"/templates/brief.md "$p/brief.md"
+   cp "$H"/templates/claims.md "$p/claims.md"
+   cp "$H"/templates/queue.md "$p/_queue.md"
+   cp "$H"/templates/log.md "$p/_log.md"
+   cp "$H"/templates/index.md "$p/_index.md"
+   cp "$H"/templates/project-readme.md "$p/README.md"
    ```
+
+   Outside the harness, add `<slug>/.cache/` to the workspace's `.gitignore` (ask first) so cached
+   full texts are not committed.
 
    Save anything the human shared to `inputs/` and note it in `_log.md`. Fill the Intent section of
    `brief.md` in their words, and record each answer in its Decisions table.

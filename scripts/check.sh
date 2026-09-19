@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-# Mechanical checks for one project. Usage: scripts/check.sh <slug> [--urls]
+# Mechanical checks for one project.
+# Usage: scripts/check.sh <slug | path/to/project> [--urls]
+#   a slug means projects/<slug> inside the harness; a path works for projects kept elsewhere.
 set -uo pipefail
 
-cd "$(dirname "$0")/.."
-slug="${1:?usage: scripts/check.sh <slug> [--urls]}"
-p="projects/$slug"
-[ -d "$p" ] || { echo "no such project: $p"; exit 2; }
+H="$(cd "$(dirname "$0")/.." && pwd)"
+arg="${1:?usage: scripts/check.sh <slug | path/to/project> [--urls]}"
+if [ -f "$arg/brief.md" ]; then p="$(cd "$arg" && pwd)"; else p="$H/projects/$arg"; fi
+[ -d "$p" ] || { echo "no such project: $arg"; exit 2; }
 fail=0
 flag() { echo "$1"; fail=1; }
 
@@ -19,16 +21,16 @@ grep -oE '\(sources/[0-9]{3}-[^)]+\.md\)' "$p/_index.md" | tr -d '()' | while re
 done | grep . && fail=1
 
 # 2. Every source file appears in the index
-for f in "${files[@]}"; do
+for f in "${files[@]+"${files[@]}"}"; do
   grep -q "(sources/$(basename "$f"))" "$p/_index.md" || flag "ORPHAN $f"
 done
 
 # 3. No sequence-number collisions
-dups=$(for f in "${files[@]}"; do basename "$f" | cut -c1-3; done | sort | uniq -d)
+dups=$(for f in "${files[@]+"${files[@]}"}"; do basename "$f" | cut -c1-3; done | sort | uniq -d)
 [ -n "$dups" ] && flag "NUMBER COLLISION: $dups"
 
 # 4. Every source file has a URL
-for f in "${files[@]}"; do grep -q '^\*\*URL:\*\*' "$f" || flag "NO URL $f"; done
+for f in "${files[@]+"${files[@]}"}"; do grep -q '^\*\*URL:\*\*' "$f" || flag "NO URL $f"; done
 
 # 5. Relative links in summaries resolve
 for m in "$p/README.md" "$p/brief.md" "$p"/outputs/*.md; do
@@ -41,19 +43,19 @@ done | grep . && fail=1
 
 # 6. Format compliance
 for field in '^\*\*Type:' '^\*\*Published:' '^## Finding' '^## Methodology' '^## Limitations'; do
-  for f in "${files[@]}"; do grep -qE "$field" "$f" || flag "MISSING $field in $f"; done
+  for f in "${files[@]+"${files[@]}"}"; do grep -qE "$field" "$f" || flag "MISSING $field in $f"; done
 done
 
 # 7. Sources held in more than one file (judgment call, reported not failed)
-grep -h '^\*\*URL:\*\*' "${files[@]}" /dev/null 2>/dev/null | sed 's/^\*\*URL:\*\* *//' | sort | uniq -c | awk '$1>1 {print "SHARED URL (check findings differ):", $2}'
+grep -h '^\*\*URL:\*\*' "${files[@]+"${files[@]}"}" /dev/null 2>/dev/null | sed 's/^\*\*URL:\*\* *//' | sort | uniq -c | awk '$1>1 {print "SHARED URL (check findings differ):", $2}'
 
 # 8. No changelog scaffolding
 grep -lniE 'supersede|correction needed|previously stated|corrected excerpt' \
-  "${files[@]}" "$p/README.md" "$p"/outputs/*.md 2>/dev/null | sed 's/^/CHANGELOG TEXT in /' | grep . && fail=1
+  "${files[@]+"${files[@]}"}" "$p/README.md" "$p"/outputs/*.md 2>/dev/null | sed 's/^/CHANGELOG TEXT in /' | grep . && fail=1
 
 # 9. Claims ledger: IDs, required fields, source links, cited IDs, human marks, recheck dates
 if [ -f "$p/claims.md" ]; then
-  ids=$(grep -oE "^### C[0-9]{3}" "$p/claims.md" | cut -c5-)
+  ids=$(grep -oE "^### C[0-9]{3}" "$p/claims.md" | cut -c5- | grep -v "^C000$")
   dup=$(echo "$ids" | sort | uniq -d); [ -n "$dup" ] && flag "DUPLICATE CLAIM ID: $dup"
   grep -oE "sources/[0-9]{3}-[^)| ]+\.md" "$p/claims.md" | sort -u | while read -r s; do
     [ -f "$p/$s" ] || echo "CLAIM CITES MISSING FILE: $s"
@@ -76,7 +78,7 @@ if [ -f "$p/claims.md" ]; then
       total++
       split("", f)
     }
-    /^### C[0-9][0-9][0-9]/ { finish(); id = substr($2, 1, 4); next }
+    /^### C[0-9][0-9][0-9]/ { finish(); id = substr($2, 1, 4); if (id == "C000") id = ""; next }
     id != "" && /^- \*\*[A-Za-z ]+:\*\*/ {
       line = $0; sub(/^- \*\*/, "", line); k = line; sub(/:\*\*.*/, "", k)
       v = line; sub(/^[^*]*:\*\* ?/, "", v); f[k] = v
@@ -93,7 +95,7 @@ fi
 
 # 10. URLs resolve (slow; opt in). 403 = bot-blocked, not dead.
 if [ "${2:-}" = "--urls" ]; then
-  grep -h '^\*\*URL:\*\*' "${files[@]}" /dev/null | sed 's/^\*\*URL:\*\* *//' | sort -u | while read -r u; do
+  grep -h '^\*\*URL:\*\*' "${files[@]+"${files[@]}"}" /dev/null | sed 's/^\*\*URL:\*\* *//' | sort -u | while read -r u; do
     c=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 20 "$u")
     case "$c" in 200|202|301|302|403) ;; *) echo "URL FAIL $c $u";; esac
   done | grep . && fail=1

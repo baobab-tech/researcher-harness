@@ -2,7 +2,7 @@
 
 > Research methods, verification rules, templates, and shell tools for AI agents producing literature reviews, background briefings, perspective maps, and document reviews. Every number in an output traces through a claims ledger to a source file and the source's full text.
 
-Read AGENTS.md first, then the SKILL.md for the task. Stop at every CHECKPOINT the skill names and ask the human; start with intent. Copy templates; do not write project files from memory. Paths are relative to https://raw.githubusercontent.com/baobab-tech/researcher-harness/main/
+Clone the repo (https://github.com/baobab-tech/researcher-harness) so you can run the scripts; without a shell, read the files over HTTP and follow the method by hand. Read AGENTS.md first, then the SKILL.md for the task. Stop at every CHECKPOINT the skill names and ask the human; start with intent. Copy templates; do not write project files from memory. Paths are relative to https://raw.githubusercontent.com/baobab-tech/researcher-harness/main/
 
 ## Rules
 

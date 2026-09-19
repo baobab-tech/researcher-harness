@@ -7,6 +7,46 @@ Cowork, or another agent. Each research project lives in `projects/<slug>/` and 
 Process skills live in `skills/<name>/SKILL.md`; API and retrieval references live in `tools/`;
 executable tools live in `scripts/`. `CLAUDE.md` and `.claude/skills` are symlinks to these for Claude Code.
 
+## Working from another workspace
+
+When the human is in their own project and points you at this repo, bring the harness in rather
+than working from memory of it. You need a local shell: clone, then run the scripts.
+
+1. **Clone beside their work**, not into their source tree:
+
+   ```bash
+   git clone --depth 1 https://github.com/baobab-tech/researcher-harness .researcher-harness
+   ```
+
+   If `.researcher-harness/` exists, `git -C .researcher-harness pull` instead. Ask before adding
+   it to their `.gitignore`, and never edit their agent config, `CLAUDE.md`, or settings without
+   asking.
+
+2. **Read `.researcher-harness/AGENTS.md`** (this file) and the skill for the task.
+
+3. **Ask where the research project should live** at the intent checkpoint. Default:
+   `research/<slug>/` in their workspace, so the output is theirs and is versioned with their
+   work. Alternative: `.researcher-harness/projects/<slug>/`, when the research is throwaway or
+   should stay out of their repo.
+
+4. **Run scripts from the clone**; they work on a project anywhere:
+
+   ```bash
+   .researcher-harness/scripts/keys.sh
+   .researcher-harness/scripts/search.sh academic "<query>" 10
+   .researcher-harness/scripts/check.sh research/<slug>
+   .researcher-harness/scripts/status.sh
+   ```
+
+   `status.sh` with no arguments covers the harness's own `projects/` and `research/*/` in the
+   current directory.
+
+5. **Keys** come from the environment or `.researcher-harness/.env`. Offer to create that file;
+   it is gitignored inside the clone. Never write keys into their repo.
+
+6. **Their existing material** (notes, drafts, data in their workspace) is evidence to check like
+   any other. Copy what the project uses into `<project>/inputs/` and log it.
+
 ## Human in the loop
 
 The human owns the question, the design, and the judgment on what the evidence means. The agent
