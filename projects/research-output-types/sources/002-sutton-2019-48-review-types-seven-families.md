@@ -38,6 +38,18 @@ Defining features by family, as the authors state them:
 | Mixed methods | integrates quantitative and qualitative data; includes realist reviews |
 | Purpose-specific | tailored to one purpose: HTA, concept analysis, scoping, mapping |
 
+Review types by family, from Table 3 (names as given; "also known as" in brackets):
+
+| Family | Types |
+|--------|-------|
+| Traditional | critical review; integrative review; narrative review; narrative summary; state of the art review |
+| Systematic | Cochrane review of effects; comparative effectiveness review; diagnostic systematic review (diagnostic test accuracy review); meta-analysis; network meta-analysis; prognostic review; psychometric review; review of economic evaluations; systematic review; systematic review of epidemiology studies (prevalence and/or incidence, etiology and/or risk) |
+| Review of reviews | review of reviews (overview); umbrella review |
+| Rapid | rapid review (rapid evidence synthesis); rapid evidence assessment; rapid realist synthesis |
+| Qualitative | qualitative evidence synthesis; qualitative interpretive meta-synthesis; qualitative meta-synthesis; qualitative research synthesis; best fit framework synthesis; framework synthesis; meta-aggregation; meta-ethnography; meta-interpretation; meta-narrative review; meta-study; meta-summary; thematic synthesis |
+| Mixed methods | mixed methods synthesis; Bayesian meta-analysis; EPPI-Centre review; critical interpretive synthesis; narrative synthesis; realist synthesis; rapid realist synthesis (listed under rapid) |
+| Purpose-specific | concept synthesis (concept analysis); content analysis; expert opinion/policy review; technology assessment review (HTA); scoping review (scoping study); mapping review (evidence map, systematic map); methodological review; systematic search and review; systematized review |
+
 ## Methodology
 
 Review types were compiled from published typologies and the authors' experience, screened against
@@ -46,9 +58,9 @@ guidance from review-producing organisations, PubMed, MEDLINE, and Google Schola
 
 ## Limitations and conflicts
 
-Read from the accepted manuscript on White Rose; the deposit omits Tables 3 and 4, which hold the
-full list of 48 types and their definitions, so individual types beyond those named in the text are
-not recorded here. Health-focused. Booth co-authored the 2009 typology. No funding stated in the
+Body text read from the accepted manuscript on White Rose. Table 3 read from the published Wiley
+version via Jina Reader, which reached it on 2026-09-19 after earlier attempts hit a Cloudflare
+interstitial. Health-focused. Booth co-authored the 2009 typology. No funding stated in the
 manuscript.
 
 ## Relation to other sources
@@ -58,4 +70,4 @@ question type.
 
 ---
 Retrieved: 2026-09-19
-Search: Serper "Meeting the review family" whiterose; Wiley full text blocked by Cloudflare
+Search: Serper "Meeting the review family" whiterose; Wiley full text via scripts/fetch.sh (Jina) for Table 3

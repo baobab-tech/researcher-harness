@@ -262,19 +262,24 @@ skill, and state the adaptation in the output's Method section.
 
 ## Scripts
 
-Run from the repo root. Each loads `.env` itself and exits 3 naming any missing key.
+Run from the repo root. Each loads `.env` itself and exits 3 naming any missing key. Every key is
+optional: the scripts use what is present and fall back to keyless providers. Before a project, run
+`scripts/keys.sh`; if web search is unavailable, say so at the intent checkpoint and name the free
+tier that fills the gap (`tools/search-providers.md`).
 
 | Script | Does |
 |--------|------|
-| `scripts/search.sh <openalex\|arxiv\|scholar\|web\|news> "<query>" [n]` | search one backend; prints `year \| title \| id` |
+| `scripts/keys.sh` | which providers are usable with the keys present; run first |
+| `scripts/search.sh academic\|web\|news "<query>" [n]` | search, choosing a provider by the keys present; or name one: `openalex`, `arxiv`, `crossref`, `europepmc`, `core`, `semanticscholar`, `tavily`, `serper`, `scholar`, `brave`, `exa`, `jina` |
 | `scripts/doi.sh <doi>` | confirm a record on Crossref; find OA copies via Unpaywall and Semantic Scholar |
-| `scripts/fetch.sh <url> [out]` | URL to text: PDFs via `pdftotext -layout`, pages via Jina; exits 4 on a bot check |
+| `scripts/fetch.sh <url> [out]` | URL to text: `pdftotext` for PDFs, then Jina, Tavily, Exa as keys allow; exits 4 if all are blocked |
 | `scripts/check.sh <slug> [--urls]` | mechanical checks on a project |
 
 ## Tool references
 
 | File | Holds |
 |------|-------|
+| `tools/search-providers.md` | every provider: coverage, key, free tier, fallbacks, how to add one |
 | `tools/openalex.md`, `tools/arxiv.md` | academic search, no key needed |
 | `tools/openalex-api-reference.md`, `tools/arxiv-api-reference.md` | full API references |
 | `tools/serper.md` | web, news, and scholar search; key in `.env` |

@@ -39,9 +39,10 @@ means.
    | a check before sharing, or an update | [verify](skills/verify/SKILL.md) and [METHOD.md](METHOD.md) | none |
    | a human spot-check of findings | [sanity-check](skills/sanity-check/SKILL.md) | [sanity-check](templates/sanity-check.md) |
 
-4. **Check your tools.** `bash`, `curl`, `jq`, `pdftotext`. API keys come from environment
-   variables or a `.env` file at the repo root. Each script names a missing key and exits 3; work
-   on with the keyless backends.
+4. **Check your tools.** `bash`, `curl`, `jq`, `pdftotext`. Run `scripts/keys.sh`: every API key is
+   optional, academic search and fetching work with none, and the scripts pick whichever providers
+   are keyed (environment variables or `.env`). If web search is unavailable, tell the human and
+   name the free tier that fills it ([tools/search-providers.md](tools/search-providers.md)).
 
 5. **Stop at every CHECKPOINT** the skill names, using [templates/checkpoint.md](templates/checkpoint.md).
    Start with the intent checkpoint: ask what the research is for before searching.
@@ -88,12 +89,15 @@ briefing on the kinds of task and output researchers produce, with its
 
 | Script | Does | Keys |
 |--------|------|------|
-| `scripts/search.sh openalex\|arxiv "<q>" [n]` | academic search | none |
-| `scripts/search.sh scholar\|web\|news "<q>" [n]` | Google search via Serper | `SERPER_API_KEY` |
+| `scripts/keys.sh` | lists usable providers for the keys present | none |
+| `scripts/search.sh academic "<q>" [n]` | OpenAlex; also `arxiv`, `crossref`, `europepmc`, `core`, `semanticscholar` | none |
+| `scripts/search.sh web "<q>" [n]` | first keyed provider among Tavily, Serper, Brave, Exa, Jina | any one |
+| `scripts/search.sh news "<q>" [n]` | Tavily news or Serper news | either |
 | `scripts/doi.sh <doi>` | confirm the record on Crossref, find open copies | `CONTACT_EMAIL` for Unpaywall |
-| `scripts/fetch.sh <url> [out]` | URL or PDF to text; exits 4 on a bot check | `JINA_API_KEY` optional |
+| `scripts/fetch.sh <url> [out]` | URL or PDF to text via pdftotext, Jina, Tavily, Exa; exits 4 if all blocked | none required |
 | `scripts/check.sh <slug> [--urls]` | links, index, numbering, fields, claim IDs, URLs | none |
 
+Free tiers, coverage, and fallbacks for each provider: [tools/search-providers.md](tools/search-providers.md).
 [tools/](tools/) documents each API directly, plus retrieval routes around publisher blocks and the
 [verification failure modes](tools/verification.md) the rules exist to prevent.
 
@@ -101,7 +105,8 @@ briefing on the kinds of task and output researchers produce, with its
 
 ```bash
 git clone https://github.com/baobab-tech/researcher-harness && cd researcher-harness
-cp .env.example .env        # SERPER_API_KEY, JINA_API_KEY, EXA_API_KEY, CONTACT_EMAIL
+cp .env.example .env        # every key optional; add any you have
+scripts/keys.sh             # shows what is usable
 brew install jq poppler     # or apt-get install jq poppler-utils
 ```
 

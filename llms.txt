@@ -26,7 +26,9 @@ Read AGENTS.md first, then the SKILL.md for the task. Stop at every CHECKPOINT t
 
 ## Tools
 
+- [scripts/keys.sh](scripts/keys.sh): run first; every key is optional
 - [scripts/search.sh](scripts/search.sh), [scripts/doi.sh](scripts/doi.sh), [scripts/fetch.sh](scripts/fetch.sh), [scripts/check.sh](scripts/check.sh)
+- [tools/search-providers.md](tools/search-providers.md): providers, free tiers, fallbacks when keys are missing
 - [tools/verification.md](tools/verification.md): failure modes the rules prevent
 - [tools/metadata.md](tools/metadata.md): Crossref, Unpaywall, Semantic Scholar; retrieval order around publisher blocks
 - [tools/primary-sources.md](tools/primary-sources.md): PDFs, official series, organisational disclosures

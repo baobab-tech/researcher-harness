@@ -12,4 +12,4 @@ else
   echo "--- Unpaywall skipped: set CONTACT_EMAIL in .env"
 fi
 echo "--- Semantic Scholar"
-curl -s "https://api.semanticscholar.org/graph/v1/paper/DOI:$doi?fields=openAccessPdf,externalIds" | jq -r '"pdf=\(.openAccessPdf.url // "none") arxiv=\(.externalIds.ArXiv // "none") pmc=\(.externalIds.PubMedCentral // "none")"'
+curl -s ${SEMANTIC_SCHOLAR_API_KEY:+-H "x-api-key: $SEMANTIC_SCHOLAR_API_KEY"} "https://api.semanticscholar.org/graph/v1/paper/DOI:$doi?fields=openAccessPdf,externalIds" | jq -r '"pdf=\(.openAccessPdf.url // "none") arxiv=\(.externalIds.ArXiv // "none") pmc=\(.externalIds.PubMedCentral // "none")"'

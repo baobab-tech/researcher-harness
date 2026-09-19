@@ -101,7 +101,7 @@ human-confirmed so far.
 No source retrieved here covers: horizon scanning, landscape or market analysis, stakeholder
 analysis, Delphi and consensus statements, annotated bibliographies, or technical and grey-literature
 reports. The typologies are health-centred; no cross-disciplinary typology was retrieved. Grant and
-Booth 2009 and the full 48-type table in Sutton et al. 2019 were blocked by Cloudflare.
+Booth 2009 was blocked by Cloudflare; its list comes from Price 2022.
 
 ## Mapping to harness skills
 

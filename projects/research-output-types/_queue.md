@@ -21,4 +21,4 @@ Last updated: 2026-09-19
 
 ## Blocked
 
-- Grant & Booth 2009 and Sutton et al. 2019 full tables: Wiley and Salford serve Cloudflare interstitials
+- Grant & Booth 2009: Wiley and Salford serve Cloudflare interstitials

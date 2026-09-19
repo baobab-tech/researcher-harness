@@ -8,6 +8,9 @@ description: Start a research project under projects/<slug>/ by interviewing the
 1. **Check for an existing project.** Look in `projects/` for one on the same topic; if found, read
    its `brief.md` and `_queue.md` and ask whether to extend it.
 
+   Run `scripts/keys.sh`. If no web search provider is keyed, include that in the intent checkpoint:
+   what it limits and which free key fills it (`tools/search-providers.md`).
+
 2. **CHECKPOINT: intent.** Before scaffolding, ask the human (format: `templates/checkpoint.md`):
    - What is this for? What decision, paper, talk, or plan does it feed?
    - Who reads the output, and what do they already know?

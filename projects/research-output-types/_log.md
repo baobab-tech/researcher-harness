@@ -26,3 +26,8 @@ Searches performed, results found, and files created. Searches that returned not
 
 Not searched: horizon scanning, landscape analysis, Delphi/consensus, stakeholder analysis,
 non-health typologies.
+
+## 2026-09-19: second fetch
+
+11. Sutton 2019 Wiley full text via scripts/fetch.sh (Jina) succeeded; Table 3 (48 types by family)
+    added to 002.
