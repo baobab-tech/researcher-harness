@@ -11,7 +11,8 @@ description: Start a research project under projects/<slug>/ by interviewing the
    Run `scripts/keys.sh`. If no web search provider is keyed, include that in the intent checkpoint:
    what it limits and which free key fills it (`tools/search-providers.md`).
 
-2. **CHECKPOINT: intent.** Before scaffolding, ask the human (format: `templates/checkpoint.md`):
+2. **CHECKPOINT: intent.** Before scaffolding, ask the human, one question per item with the
+   structured question tool if you have one (How to ask, `AGENTS.md`):
    - What is this for? What decision, paper, talk, or plan does it feed?
    - Who reads the output, and what do they already know?
    - What do you already know or believe about the answer? What would surprise you?

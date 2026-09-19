@@ -44,7 +44,8 @@ means.
    are keyed (environment variables or `.env`). If web search is unavailable, tell the human and
    name the free tier that fills it ([tools/search-providers.md](tools/search-providers.md)).
 
-5. **Stop at every CHECKPOINT** the skill names, using [templates/checkpoint.md](templates/checkpoint.md).
+5. **Stop at every CHECKPOINT** the skill names. Ask with your structured question tool if you
+   have one; otherwise use [templates/checkpoint.md](templates/checkpoint.md).
    Start with the intent checkpoint: ask what the research is for before searching.
 
 6. **Copy templates; do not write project files from memory.** `scripts/check.sh <slug>` before
@@ -57,11 +58,12 @@ means.
 | intent | its reading of the request | purpose, audience, priors, material to share, involvement level |
 | design | a draft brief and method options | question wording, method, scope, trusted sources |
 | early findings | first sources, counts, borderline cases | direction, inclusion rulings |
-| sanity check | 5 to 10 claims with links and quotes | confirmed, wrong, or unsure for each |
+| sanity check | ranked claims with links and quotes | now or later, how many, one at a time or by file; then confirmed, wrong, or unsure for each |
 | draft | the output | framing, strength of claims, omissions |
 | handoff | state and next steps | what comes next |
 
-Answers are logged in each project's `brief.md`. The claims ledger records which claims a person
+Agents ask through their structured question tool where they have one (`AskUserQuestion` in Claude
+Code), or through a shared markdown file or artifact the human marks up. Answers are logged in each project's `brief.md`. The claims ledger records which claims a person
 confirmed, and `scripts/check.sh` reports the count and fails on any claim a person marked wrong.
 An unattended run records its defaults as `assumed` and says so in the output.
 

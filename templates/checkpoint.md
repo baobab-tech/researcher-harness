@@ -1,6 +1,8 @@
 # Checkpoint: [intent | design | early findings | sanity check | draft | handoff]
 
-Format for every message that stops for the human. Keep it short enough to answer in two minutes.
+Fallback format for a checkpoint when your runtime has no structured question tool (see How to ask
+in `AGENTS.md`). With a question tool, ask the same questions through it, one per decision, and use
+this layout only for the context you show first. Keep it short enough to answer in two minutes.
 
 **Where we are:** [one line: phase, sources read, claims recorded]
 

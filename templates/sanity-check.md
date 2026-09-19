@@ -2,9 +2,12 @@
 
 **Prepared:** YYYY-MM-DD · [Claims](../claims.md) · [Draft](../outputs/)
 
-Spot-check these before the output is shared. Each takes about a minute: open the link, find the
-quote, confirm the number and its boundary. Mark each row `confirmed`, `wrong`, or `unsure` and add
-a note. Answers go into the `Human` column of `claims.md`.
+Ranked most important first. Each check takes about a minute: open the link, find the quote, confirm
+the number and its boundary.
+
+If you are reviewing this file: mark each row's "Your check" `confirmed`, `wrong`, or `unsure`, add a
+note or comment anywhere, and tell the agent when you are done. If the agent is asking you one claim
+at a time, this file is the record of the same list.
 
 Chosen because they are load-bearing (cited most, drive the conclusion), surprising (contradict
 common belief or your stated priors), contested, or derived.

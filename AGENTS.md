@@ -16,15 +16,15 @@ its sources.
 
 ### Checkpoints
 
-Every skill marks its stops as **CHECKPOINT: <name>**. At each one, send a message in the format of
-`templates/checkpoint.md`, then wait.
+Every skill marks its stops as **CHECKPOINT: <name>**. At each one, ask the human (see How to ask),
+then wait for the answer.
 
 | Checkpoint | When | Ask about |
 |------------|------|-----------|
 | **intent** | before anything else | purpose, the decision or use it feeds, audience, what they already know or believe, material they hold, what done looks like |
 | **design** | before searching | question wording, sub-questions, method (see below), scope, criteria, sources they trust or distrust, named documents and people they know |
 | **early findings** | after the first 3 to 5 sources | whether the direction, source mix, and depth are right; surprises so far |
-| **sanity check** | before writing outputs | a packet of claims to spot-check against sources (`templates/sanity-check.md`) |
+| **sanity check** | before writing outputs | now or later, how many, one at a time or by file; then each claim against its source (`skills/sanity-check/SKILL.md`) |
 | **draft** | after the output draft | framing, emphasis, what is stated too strongly, what is missing |
 | **handoff** | before stopping | what is next, what is waiting on them |
 
@@ -37,9 +37,23 @@ Also stop, outside the schedule, when:
 
 ### How to ask
 
+Use the channel your runtime gives you, in this order:
+
+1. **A structured question tool**, where you have one: `AskUserQuestion` in Claude Code, or the
+   equivalent ask-the-user tool in other agents. One question per decision, each with 2 to 4
+   options, the recommended one first. The human answers with a click and can add a note.
+2. **A shared document**, when the human needs to read before answering or has many items to go
+   through: a markdown file in the project, or an artifact or doc if your runtime can publish one.
+   Tell them where it is, what to mark, and how to hand it back; then read their marks and comments.
+3. **A chat message** in the format of `templates/checkpoint.md`, when neither is available.
+
+Then:
+
 - **Ask what files cannot settle.** Read `brief.md`, `_queue.md`, and the decisions log first.
-- **Batch.** One message per checkpoint, at most five questions, numbered.
+- **Batch.** At most four or five questions per checkpoint.
 - **Offer options and a default.** Say what you will do if there is no answer.
+- **Let them choose timing and depth.** Before a long review (a sanity check, a draft), ask whether
+  now or later, and how much. "Later" is a valid answer: record it in `_queue.md`.
 - **Show your work.** Link the files you wrote so the human can read before answering.
 - **Ask for their material.** Documents, data, prior research, notes, contacts. Save what they
   share to `inputs/` and log it. Human-provided material is evidence to check like any other, and
@@ -114,8 +128,8 @@ projects/<slug>/
   .cache/         raw fetched text, gitignored                    scripts/fetch.sh
 ```
 
-Start one with the `new-project` skill. Checkpoint messages follow `templates/checkpoint.md`; sanity-check
-packets follow `templates/sanity-check.md`. Copy templates; do not write these files from memory.
+Start one with the `new-project` skill. Checkpoints use the question tool where there is one, else `templates/checkpoint.md`;
+sanity-check packets follow `templates/sanity-check.md`. Copy templates; do not write these files from memory.
 
 ## Evidence layers
 
