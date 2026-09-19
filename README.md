@@ -18,18 +18,16 @@ You do not need to clone this yourself. In an agent that can run commands on you
 
 ```
 Use the research harness at https://github.com/baobab-tech/researcher-harness
-for this: <your research question>. Clone it into .researcher-harness, read its
-AGENTS.md, and follow it.
+for this: <your research question>
 ```
 
 The agent clones the harness beside your work, asks what the research is for, and puts the project
 in `research/<slug>/` in your workspace unless you say otherwise. To add it to a project you are
-already working in, say so and drop the question:
+already working in, drop the question:
 
 ```
-Add the research harness at https://github.com/baobab-tech/researcher-harness to this
-project so we can use its research skills. Clone it into .researcher-harness and read
-its AGENTS.md.
+Add the research harness at https://github.com/baobab-tech/researcher-harness
+to this project so we can use its research skills.
 ```
 
 ### Where this works
