@@ -1,0 +1,5 @@
+.env
+.DS_Store
+node_modules/
+*.pdf
+.claude/settings.local.json
