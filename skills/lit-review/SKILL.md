@@ -25,7 +25,9 @@ missing. If the project already holds sources, read `METHOD.md` first. Output te
 
 4. **Screen.** Title and abstract first, logging exclusions with reasons. Then full text: a source
    enters only if its text is in `.cache/` and meets the criteria. Keep counts for the Method table.
-   Borderline calls go in a list for the next checkpoint; do not decide them alone.
+   Borderline calls go in a list for the next checkpoint; do not decide them alone. A source that
+   passes screening but cannot be retrieved is not an exclusion: queue it for the human
+   (`AGENTS.md`, When a source cannot be retrieved).
 
 5. **CHECKPOINT: early findings.** Report counts at each stage, the borderline list, and what the
    first included sources say. Ask for rulings on borderline sources and whether direction and

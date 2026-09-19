@@ -121,7 +121,7 @@ An unattended run records its defaults as `assumed` and says so in the output.
 
 ## How the evidence flows
 
-![Evidence layers, left to right: 0 Raw (.cache/NNN.txt, full text, gitignored), 1 Source (sources/NNN-*.md, one file per source), 2 Claim (claims.md, C001 onward), 3 Output (outputs/*.md citing [C001]). scripts/check.sh validates the links from outputs to claims and from claims to source files. The human sanity check marks claims confirmed, wrong, or unsure.](docs/diagrams/evidence-layers.svg)
+![Evidence layers, left to right: 0 Raw (.cache/NNN.txt, full text, gitignored), 1 Source (sources/NNN-*.md, one file per source), 2 Claim (claims.md, C001 onward), 3 Output (outputs/*.md citing [C001]). scripts/check.sh validates the links from outputs to claims and from claims to source files. The human sanity check marks claims confirmed, wrong, or unsure; when a paywall or bot check blocks retrieval, the human supplies the file into the project's inputs folder.](docs/diagrams/evidence-layers.svg)
 
 Alongside: `brief.md` (question and scope), `_log.md` (every search, including empty ones),
 `_queue.md` (state and next steps, the handoff between sessions), `_work/` (per-task scratch

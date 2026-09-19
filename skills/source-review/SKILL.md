@@ -13,8 +13,9 @@ Works inside a project, or standalone in `projects/_reviews/`. Output template:
    claims, neutral stance.
 
 2. **Retrieve the full text.** `scripts/doi.sh` finds open copies; `scripts/fetch.sh <url>
-   .cache/<name>.txt` saves the text. If only the abstract is reachable, stop and ask whether they
-   can supply the full text.
+   .cache/<name>.txt` saves the text (retrieval order: `tools/metadata.md`). If only the abstract is
+   reachable, stop and ask the human to paste the text or drop the PDF into `inputs/`: reviewing an
+   abstract is not reviewing the document.
 
 3. **Confirm identity** on Crossref. For preprints, name the version reviewed and whether later
    versions changed the claims.

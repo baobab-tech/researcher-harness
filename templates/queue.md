@@ -16,4 +16,5 @@ Last updated: YYYY-MM-DD
 
 ## Blocked
 
-[Sources that could not be retrieved, and why.]
+Sources that could not be retrieved: citation, DOI or URL, what was tried, and what the source
+would settle. Anything a person could supply belongs under "Waiting on the human" instead.

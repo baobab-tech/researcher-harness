@@ -23,5 +23,7 @@ if has EXA_API_KEY; then
   curl -s --max-time 90 -X POST https://api.exa.ai/contents -H "x-api-key: $EXA_API_KEY" -H "Content-Type: application/json" \
     -d "$(jq -n --arg u "$url" '{urls:[$u],text:true}')" | jq -r '.results[0].text // empty' > "$tmp"; blocked || done_with exa
 fi
-echo "blocked on every available route: $url. Try tools/metadata.md for repository copies, or ask the human for the file." >&2
+echo "blocked on every available route: $url" >&2
+echo "next: a repository copy (tools/metadata.md), or ask the human to paste the text or drop the" >&2
+echo "file into <project>/inputs/ and log it under 'Waiting on the human' in _queue.md" >&2
 exit 4

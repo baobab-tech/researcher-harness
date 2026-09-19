@@ -6,6 +6,7 @@
 **URL:** [retrieved URL]
 **DOI:** [if any, confirmed against Crossref]
 **Published:** [YYYY-MM]
+**Obtained:** [retrieved by the agent | supplied by the human, YYYY-MM-DD]
 **Status:** [measurement | estimate | projection | model output | opinion]
 
 ## Finding

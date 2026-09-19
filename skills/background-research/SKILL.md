@@ -23,6 +23,9 @@ missing. Output template: `templates/outputs/briefing.md`.
    .cache/NNN.txt` to save the text, then `sources/NNN-*.md` from `templates/source.md`. Include
    anything in `inputs/`.
 
+   Anything you cannot retrieve goes to the human, batched, with what it would settle
+   (`AGENTS.md`, When a source cannot be retrieved).
+
 4. **Record claims** in `claims.md`, one block each with scope, period, attribution, kind, and the
    quote from the cached text (Claims ledger, `AGENTS.md`).
 

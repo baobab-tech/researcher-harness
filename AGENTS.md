@@ -72,7 +72,7 @@ then wait for the answer.
 Also stop, outside the schedule, when:
 
 - a finding contradicts the human's stated priors or the brief's assumptions
-- a source is blocked and a decision is needed on how to proceed
+- a source cannot be retrieved and the human may be able to supply it (see below)
 - scope needs to grow or shrink
 - two credible sources disagree and the brief does not say which boundary governs
 
@@ -99,6 +99,8 @@ Then:
 - **Ask for their material.** Documents, data, prior research, notes, contacts. Save what they
   share to `inputs/` and log it. Human-provided material is evidence to check like any other, and
   a lead to follow.
+- **Ask for what you cannot reach.** A person with library access, a subscription, or the file on
+  their disk can get past a paywall or a bot check in seconds (see below).
 - **Dig at intent.** A request names a topic; the intent is the decision behind it. "Why now?",
   "What would change your mind?", "Who will read this?" often reshape the question.
 
@@ -171,6 +173,30 @@ projects/<slug>/
 
 Start one with the `new-project` skill. Checkpoints use the question tool where there is one, else `templates/checkpoint.md`;
 sanity-check packets follow `templates/sanity-check.md`. Copy templates; do not write these files from memory.
+
+### When a source cannot be retrieved
+
+Publisher bot checks, paywalls, and login walls stop `scripts/fetch.sh` on sources that matter.
+Do not work around the check, do not write the source up from its abstract, and do not quietly
+drop it.
+
+1. Try the routes in `tools/metadata.md`: a repository or preprint copy, PMC, the author's page.
+2. If none works, **ask the human to supply it**: paste the text, drop the PDF into
+   `<project>/inputs/`, or send a copy their library access can reach. Give the full citation, the
+   DOI or URL, what was tried, and what the source would settle.
+3. Add it to `_queue.md` under "Waiting on the human" in this form, and carry on with other work:
+
+   ```markdown
+   - [ ] Full text: Sutton et al. 2019, doi:10.1111/hir.12276 — Wiley returns a bot check on every
+         route; the accepted manuscript omits Table 3. Needed for the list of 48 review types.
+   ```
+
+4. Raise it at the next checkpoint, batched with any other blocked sources, rather than
+   interrupting for each one.
+5. Until it arrives: no claim rests on that source. If an output has to mention it, say what could
+   not be checked. When it arrives, treat it like any other source: read it in full, write the
+   source file, quote from the text the human supplied, and note in the source file that they
+   supplied it.
 
 ## Evidence layers
 

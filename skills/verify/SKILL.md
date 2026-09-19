@@ -19,7 +19,9 @@ Phases 0, 3, 4, 5, and 6 of `METHOD.md` for `projects/<slug>/`.
    every load-bearing claim, a sample, or specific sub-questions. Ask whether anything has changed
    in their understanding since the project was written.
 
-5. **Re-check claims** against full text (`.cache/` if present, else refetch): confirm the record
+5. **Re-check claims** against full text (`.cache/` if present, else refetch; where a source can no
+   longer be reached and nothing is cached, ask the human for the file rather than passing the
+   claim): confirm the record
    with `scripts/doi.sh`, find the number, confirm boundary, method, funding, status, and relevance
    to `brief.md`. Outcome per source file: `OK`, `FIXED`, or `DELETE`. Deletions of load-bearing
    files wait for the human's agreement at the next checkpoint.

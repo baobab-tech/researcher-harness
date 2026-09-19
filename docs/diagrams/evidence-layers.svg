@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 362" role="img" aria-labelledby="el-title el-desc">
   <title id="el-title">Evidence layers</title>
-  <desc id="el-desc">Four layers, each written from the one to its left. Layer 0, Raw: .cache/NNN.txt, the full text as fetched by scripts/fetch.sh, gitignored. Layer 1, Source: sources/NNN-*.md, one file per source with its numbers, boundary, funding, and limits. Layer 2, Claim: claims.md, entries C001 onward with statement, scope, period, attribution, kind, quote, status, and human check. Layer 3, Output: outputs/*.md, prose citing claim IDs such as [C001]. The human sanity check marks claims in layer 2 confirmed, wrong, or unsure. scripts/check.sh validates the links from outputs to claims and from claims to source files.</desc>
+  <desc id="el-desc">Four layers, each written from the one to its left. Layer 0, Raw: .cache/NNN.txt, the full text as fetched by scripts/fetch.sh, gitignored. Layer 1, Source: sources/NNN-*.md, one file per source with its numbers, boundary, funding, and limits. Layer 2, Claim: claims.md, entries C001 onward with statement, scope, period, attribution, kind, quote, status, and human check. Layer 3, Output: outputs/*.md, prose citing claim IDs such as [C001]. The human sanity check marks claims in layer 2 confirmed, wrong, or unsure. scripts/check.sh validates the links from outputs to claims and from claims to source files. When a paywall or bot check blocks retrieval, the human supplies the file into the project's inputs folder.</desc>
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; }
     .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace; }
@@ -54,6 +54,12 @@
   <text class="at b mono" x="98" y="35" text-anchor="middle">scripts/fetch.sh</text>
   <text class="t2" x="98" y="53" text-anchor="middle">URL or PDF to text</text>
   <path class="ln" d="M98,62 V100" marker-end="url(#el-arrow)"/>
+
+  <!-- blocked retrieval: the human supplies the file -->
+  <rect class="hb" x="16" y="286" width="164" height="48" rx="8"/>
+  <text class="ht b t14" x="98" y="305" text-anchor="middle">Blocked?</text>
+  <text class="t2" x="98" y="323" text-anchor="middle">human sends it to inputs/</text>
+  <path class="hln" d="M98,286 V266" marker-end="url(#el-arrow-h)"/>
 
   <!-- human sanity check touches layer 2 -->
   <rect class="hb" x="410" y="16" width="232" height="46" rx="8"/>

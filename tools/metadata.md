@@ -94,7 +94,11 @@ verify_doi() {
 4. Jina Reader on the publisher URL (`tools/jina.md`)
 5. `pdftotext -layout` on a downloaded PDF, for table-heavy documents
 6. Author's institutional page or personal site
-7. If none works, say so in the file's Limitations and mark what was not checked
+7. Ask the human: library access, a subscription, or the file already on their disk beats every
+   route above. Queue it under "Waiting on the human" in `_queue.md` with the citation and what the
+   source would settle (`AGENTS.md`, When a source cannot be retrieved)
+8. If it never arrives, say so in the file's Limitations and mark what was not checked
 
 Elsevier (ScienceDirect) and Wiley serve a Cloudflare interstitial to every automated route. Do not
-retry in a loop or try to defeat the check; find another copy or record the gap.
+retry in a loop or try to defeat the check; find another copy, ask the human for it, or record the
+gap.

@@ -19,7 +19,9 @@ Pick from `claims.md`, ranked so the most important come first:
 4. **coverage:** at least one per source type
 
 For each claim, find the exact quote in the cached text (`.cache/`) and a direct link with page or
-section. A claim you cannot quote is not ready; fix it before asking anyone to check it.
+section. A claim you cannot quote is not ready: fix it, or, where the source cannot be
+retrieved, ask the human for the file and hold the claim back (`AGENTS.md`, When a source
+cannot be retrieved).
 
 Write the ranked list to `outputs/_sanity-check.md` from `templates/sanity-check.md`. It is the
 record whichever way the check runs.
