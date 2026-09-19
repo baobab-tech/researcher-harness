@@ -1,5 +1,7 @@
 # Metadata
 
+Wrapped by `scripts/doi.sh <doi>`. The calls below are for anything the script does not cover.
+
 Verify a source's identity before writing about it. Crossref, Semantic Scholar, and Unpaywall are
 free and need no key. Unpaywall requires a contact email: set `CONTACT_EMAIL` in `.env`.
 

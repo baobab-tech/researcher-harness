@@ -12,7 +12,7 @@ Requires `projects/<slug>/brief.md`. Run `new-project` first if it does not exis
 
 ## Steps
 
-1. **Map the field before collecting sources.** Two or three broad searches (Serper web, OpenAlex
+1. **Map the field before collecting sources.** Two or three broad searches with `scripts/search.sh` (Serper web, OpenAlex
    sorted by citations, a recent review article) to identify:
    - the terms of art and how they are defined, including terms used inconsistently
    - the institutions that produce primary data (agencies, registries, statistics offices)

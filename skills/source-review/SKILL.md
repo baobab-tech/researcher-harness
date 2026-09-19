@@ -10,7 +10,7 @@ Works inside a project (`projects/<slug>/sources/`) or standalone (write to
 
 ## Steps
 
-1. **Retrieve the full text.** Follow the retrieval order in `tools/metadata.md`. If only the
+1. **Retrieve the full text.** `scripts/doi.sh` finds open copies; `scripts/fetch.sh` converts them to text. Follow the retrieval order in `tools/metadata.md`. If only the
    abstract is reachable, stop and tell the user; do not review an abstract.
 
 2. **Confirm identity.** Crossref for title, authors, venue, year. For preprints, note which version

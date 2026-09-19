@@ -1,5 +1,7 @@
 # Serper
 
+Wrapped by `scripts/search.sh scholar|web|news "<query>"`.
+
 Google search via serper.dev. Key in `.env` as `SERPER_API_KEY`.
 
 ```bash

@@ -20,7 +20,7 @@ Write the search protocol into `brief.md` before searching:
 
 ## 2. Search
 
-Run every query and log it in `_log.md` with the hit count and what was kept, including zero-hit
+Run every query with `scripts/search.sh` (or the raw APIs in `tools/`) and log it in `_log.md` with the hit count and what was kept, including zero-hit
 queries. Then snowball: for each included anchor paper, pull references and citations from
 Semantic Scholar (`tools/metadata.md`) and screen those too.
 

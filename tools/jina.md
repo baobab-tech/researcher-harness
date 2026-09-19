@@ -1,5 +1,7 @@
 # Jina Reader
 
+Wrapped by `scripts/fetch.sh <url>`, which also routes PDFs through `pdftotext -layout`.
+
 `r.jina.ai` fetches a URL and returns clean markdown. It renders JavaScript and handles PDFs, the
 two main reasons `WebFetch` fails.
 
