@@ -91,7 +91,7 @@ briefing on the kinds of task and output researchers produce, with its
 |--------|------|------|
 | `scripts/keys.sh` | lists usable providers for the keys present | none |
 | `scripts/search.sh academic "<q>" [n]` | OpenAlex; also `arxiv`, `crossref`, `europepmc`, `core`, `semanticscholar` | none |
-| `scripts/search.sh web "<q>" [n]` | first keyed provider among Tavily, Serper, Brave, Exa, Jina | any one |
+| `scripts/search.sh web "<q>" [n]` | first keyed provider among Tavily, Serper, SerpApi, Brave, Exa, Jina | any one |
 | `scripts/search.sh news "<q>" [n]` | Tavily news or Serper news | either |
 | `scripts/doi.sh <doi>` | confirm the record on Crossref, find open copies | `CONTACT_EMAIL` for Unpaywall |
 | `scripts/fetch.sh <url> [out]` | URL or PDF to text via pdftotext, Jina, Tavily, Exa; exits 4 if all blocked | none required |

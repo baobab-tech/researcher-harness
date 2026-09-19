@@ -270,7 +270,7 @@ tier that fills the gap (`tools/search-providers.md`).
 | Script | Does |
 |--------|------|
 | `scripts/keys.sh` | which providers are usable with the keys present; run first |
-| `scripts/search.sh academic\|web\|news "<query>" [n]` | search, choosing a provider by the keys present; or name one: `openalex`, `arxiv`, `crossref`, `europepmc`, `core`, `semanticscholar`, `tavily`, `serper`, `scholar`, `brave`, `exa`, `jina` |
+| `scripts/search.sh academic\|web\|news "<query>" [n]` | search, choosing a provider by the keys present; or name one: `openalex`, `arxiv`, `crossref`, `europepmc`, `core`, `semanticscholar`, `tavily`, `serper`, `scholar`, `serpapi`, `serpapi-scholar`, `brave`, `exa`, `jina` |
 | `scripts/doi.sh <doi>` | confirm a record on Crossref; find OA copies via Unpaywall and Semantic Scholar |
 | `scripts/fetch.sh <url> [out]` | URL to text: `pdftotext` for PDFs, then Jina, Tavily, Exa as keys allow; exits 4 if all are blocked |
 | `scripts/check.sh <slug> [--urls]` | mechanical checks on a project |

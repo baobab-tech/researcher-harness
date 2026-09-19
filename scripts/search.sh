@@ -7,7 +7,7 @@
 #   scripts/search.sh <provider> "<query>" [n]
 #
 # Providers: openalex arxiv semanticscholar crossref europepmc core   (no key)
-#            tavily serper scholar brave exa jina                      (key; see scripts/keys.sh)
+#            tavily serper scholar serpapi serpapi-scholar brave exa jina   (key; see scripts/keys.sh)
 set -uo pipefail
 . "$(dirname "$0")/_env.sh"
 mode="${1:?usage: scripts/search.sh <academic|web|news|provider> <query> [n]}"; q="${2:?query}"; n="${3:-10}"
@@ -46,6 +46,11 @@ run() {
       curl -s -X POST "https://google.serper.dev/$ep" -H "X-API-KEY: $SERPER_API_KEY" -H "Content-Type: application/json" \
         -d "$(jq -n --arg q "$q" --argjson n "$n" '{q:$q,num:$n}')" \
         | jq -r '(.organic // .news)[] | "\(.year // .date // "-") | \(.title) | \(.link)"' | head -n "$n" ;;
+    serpapi|serpapi-scholar)
+      need_key SERPAPI_API_KEY
+      eng=google; [ "$1" = serpapi-scholar ] && eng=google_scholar
+      curl -s "https://serpapi.com/search.json?engine=$eng&q=$(enc "$q")&num=$n&api_key=$SERPAPI_API_KEY" \
+        | jq -r 'if .organic_results then .organic_results[] | "\(.date // (.publication_info.summary // "-" | capture("(?<y>(19|20)[0-9]{2})").y? // "-")) | \(.title) | \(.link)" else "error: \(.error // "no results")" end' | head -n "$n" ;;
     brave)
       need_key BRAVE_API_KEY
       curl -s "https://api.search.brave.com/res/v1/web/search?q=$(enc "$q")&count=$n" -H "Accept: application/json" -H "X-Subscription-Token: $BRAVE_API_KEY" \

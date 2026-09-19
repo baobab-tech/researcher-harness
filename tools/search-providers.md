@@ -29,6 +29,7 @@ relying on one.
 |----------|----------|-----------|--------|-------|-------|
 | Tavily | `TAVILY_API_KEY` | 1,000 credits/month, no card ([pricing](https://www.tavily.com/pricing)) | yes, 1 credit (basic) | yes, 1 credit per 5 URLs | built for agents; returns page snippets; `news` topic |
 | Serper | `SERPER_API_KEY` | 2,500 queries once, no card ([serper.dev](https://serper.dev)) | Google web, news, scholar | no | best for named documents and `filetype:pdf` |
+| SerpApi | `SERPAPI_API_KEY` | 250 searches/month, 50/hour ([pricing](https://serpapi.com/pricing), as reported 2026-09-19) | Google web (`serpapi`) and Scholar (`serpapi-scholar`) | no | many other engines available through its API |
 | Brave | `BRAVE_API_KEY` | $5 credit/month; card required for identity ([pricing](https://brave.com/search/api/)) | independent index | no | |
 | Exa | `EXA_API_KEY` | $10 credit/month ([pricing](https://exa.ai/pricing)) | neural search | yes, clean text | search returns secondary content for technical topics; strong for fetch |
 | Jina | `JINA_API_KEY` | 10M tokens per new key ([reader](https://jina.ai/reader)) | yes (`s.jina.ai`) | yes | key raises fetch rate limits |
@@ -46,7 +47,7 @@ Not wired into the scripts, available to agents with the right runtime:
 ## Choosing
 
 Set `WEB_SEARCH_ORDER` in `.env` to change which keyed provider `search.sh web` tries first.
-Default: `tavily serper brave exa jina`.
+Default: `tavily serper serpapi brave exa jina`.
 
 | Need | Use |
 |------|-----|

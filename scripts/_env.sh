@@ -18,11 +18,11 @@ need_key() {
 }
 
 # Default order for web search when no provider is named. Override with WEB_SEARCH_ORDER in .env.
-WEB_SEARCH_ORDER="${WEB_SEARCH_ORDER:-tavily serper brave exa jina}"
+WEB_SEARCH_ORDER="${WEB_SEARCH_ORDER:-tavily serper serpapi brave exa jina}"
 
 key_for() {
   case "$1" in
-    tavily) echo TAVILY_API_KEY ;; serper|scholar) echo SERPER_API_KEY ;; brave) echo BRAVE_API_KEY ;;
+    tavily) echo TAVILY_API_KEY ;; serper|scholar) echo SERPER_API_KEY ;; serpapi) echo SERPAPI_API_KEY ;; brave) echo BRAVE_API_KEY ;;
     exa) echo EXA_API_KEY ;; jina) echo JINA_API_KEY ;; *) echo "" ;;
   esac
 }

@@ -7,7 +7,7 @@ echo "Search and fetch providers (see tools/search-providers.md for free tiers)"
 echo
 row PROVIDER STATUS USE
 for p in openalex arxiv semanticscholar crossref europepmc core; do row "$p" ready "academic search, no key"; done
-for p in tavily serper brave exa jina; do
+for p in tavily serper serpapi brave exa jina; do
   k=$(key_for "$p")
   if has "$k"; then row "$p" ready "web search ($k)"; else row "$p" "no key" "set $k to enable"; fi
 done
