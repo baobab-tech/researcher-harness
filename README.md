@@ -186,6 +186,32 @@ Nothing below is decided.
   once is not re-checked from scratch.
 - **A product** built on the same method.
 
+## Contributing
+
+Issues and pull requests are welcome.
+
+Most useful:
+
+- **Skills** for output types not covered yet: umbrella review, meta-analysis, qualitative evidence
+  synthesis, realist review.
+- **Providers**: another search or fetch API, wired in as described in
+  [tools/search-providers.md](tools/search-providers.md).
+- **Failure modes** for [tools/verification.md](tools/verification.md), with the real case that
+  produced them.
+- **Reports** from running the harness in an agent that is not in the table above, working or not.
+- **Fixes** where the guidance is wrong, ambiguous, or assumes one agent's runtime.
+
+Before opening a pull request:
+
+- Run `scripts/check.sh <project>` for any project you touched, and `bash -n scripts/*.sh`.
+- Keep it markdown and bash: no build step, no dependencies beyond `curl`, `jq`, and `pdftotext`.
+- Follow the writing style in [AGENTS.md](AGENTS.md): lead with the fact, no verdict words, one
+  fact per sentence.
+- Date any claim about a tool or a free tier, and link the page you read it on.
+
+Contributions are accepted under the licences below: CC BY 4.0 for documentation and content, MIT
+for scripts.
+
 ## Licence
 
 Documentation, skills, templates, and project content: [CC BY 4.0](LICENSE). Scripts in
